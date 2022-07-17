@@ -5,19 +5,41 @@ import {fetchPizza} from "../../redux/asyncActions";
 import {RootState, useAppDispatch} from "../../redux/store";
 import PizzaCard from "../PizzaCard/PizzaCard";
 import {useSelector} from "react-redux";
+import {getCartFromLocalStorage} from "../../utils/getCartFromLocalStorage";
+import {retry} from "@reduxjs/toolkit/query";
+import Skeleton from '../Skeleton/Skeleton';
 
 const PizzaList = () => {
 
     const loadingRef = useRef(false);
+    const isMounted = React.useRef(false);
     const dispatch = useAppDispatch();
-    const {pizzas} = useSelector((state: RootState) => state.pizza);
+    const {pizzas, status} = useSelector((state: RootState) => state.pizza);
+    const {cartItems} = useSelector((state: RootState) => state.cart);
+
 
     useEffect(() => {
         if(!loadingRef.current) {
-            dispatch(fetchPizza())
+            try {
+                dispatch(fetchPizza());
+            } catch (e) {
+                console.log(e)
+            }
         }
-        loadingRef.current = true
+        loadingRef.current = true;
+
     }, [])
+
+    useEffect(() => {
+        if(isMounted.current) {
+            localStorage.setItem('dodoPizza', JSON.stringify(cartItems));
+        }
+        isMounted.current = true;
+    }, [cartItems])
+
+    const pizzass = pizzas.map((item) => {
+        return <PizzaCard key={item.id} {...item} />
+    })
 
     return (
         <div className="page__pizza pizza">
@@ -27,11 +49,8 @@ const PizzaList = () => {
 
                 <div className="pizza__items">
 
-                    {pizzas.length > 0 ?
-                        pizzas.map((item) => {
-                            return <PizzaCard key={item.id} {...item} />
-                        })
-                        : <div>NO PIZZA</div>}
+                    {(status === 'pizza loading') ? [...new Array(8)].map((_, index) => <Skeleton key={index}/>) : pizzass}
+
 
 
 

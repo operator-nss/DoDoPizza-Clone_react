@@ -4,7 +4,6 @@ import {fetchPizza} from "../asyncActions";
 
 
 export interface Pizza {
-    id: string,
     imageUrl: string,
     image00 : string,
     image11 : string,
@@ -12,10 +11,12 @@ export interface Pizza {
     image21 : string,
     title: string,
     price: number[],
-    realId: string,
+    realId: number,
     additives: string[],
     removable: string[],
     weight: number[],
+    compound: number[],
+    id:number
 }
 
 interface PizzaInterface {

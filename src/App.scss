@@ -258,26 +258,91 @@ h6 {
     position: fixed;
     z-index: 10;
     top: 0;
-    width: 100%;
+    width: 100vw;
     background-color: #fff;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     .header__container-bottom {
       min-height: 58px;
       align-items: center;
     }
+    .menu__header {
+      transform: translate(0px, 0px);
+    }
   }
-
 }
+
+.menu__header {
+  display: flex;
+  align-items: center;
+  transform: translate(-52px, 0px);
+  transition: all 0.3s ease 0s;
+}
+
+.header__dodo {
+  width: 36px;
+  height: 36px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
 
 .header__container-bottom {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  overflow: hidden;
 }
 
 
 .header__cart {
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  padding: 15px 25px!important;
+  &-number {
+    opacity: 1;
+    visibility: visible;
+    &.active {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  &-title {
+    position: relative;
+    &:after {
+      content: '';
+      background-color: #fff;
+      width: 1px;
+      height: 100%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      opacity: 0.5;
+    }
+  }
+
+  &-image {
+    width: 20px;
+    height: 20px;
+    transform: translate(10px, 4px);
+    transition: all 0.3s ease 0s;
+    opacity: 0;
+    visibility: hidden;
+    &.active {
+      transform: translate(20px, 4px);
+      opacity: 1;
+      visibility: visible;
+    }
+    img  {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+
 }
 
 .delivery-header {
@@ -644,6 +709,7 @@ h6 {
   }
 
   .cart__close {
+    position: fixed;
     left: auto;
     top: 20px;
     right: 20px;

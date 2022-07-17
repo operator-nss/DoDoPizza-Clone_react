@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './cart.scss'
-
 import closeButton from '../../assets/img/close.svg'
+
 import {useSelector} from "react-redux";
 import {RootState, useAppDispatch} from "../../redux/store";
 import clsx from "clsx";
@@ -13,10 +13,28 @@ import CartEmpty from "./CartEmpty";
 const CartContainer: React.FC = () => {
     const dispatch = useAppDispatch();
     const {cartOpened, cartItems} = useSelector((state: RootState) => state.cart);
+    const [openPopupInfo, setOpenPopupInfo] = useState(false);
+    const [openPopupSouces, setOpenPopupSouces] = useState(false);
+
 
     const closeCart = () => {
         dispatch(setCartOpened(false));
+        setOpenPopupInfo(false);
+        setOpenPopupSouces(false)
     }
+
+    useEffect(() => {
+        if (cartOpened) {
+            document.body.style.overflow = "hidden";
+            document.body.style.paddingRight = '17px';
+        } else {
+            setTimeout(() => {
+                document.body.style.overflow = '';
+                document.body.style.paddingRight = '';
+            }, 300)
+        }
+    }, [cartOpened])
+
 
     return (
         <>
@@ -32,7 +50,11 @@ const CartContainer: React.FC = () => {
 
                 <div className="cart__body">
 
-                    {cartItems.length > 0 ? <Cart closeCart={closeCart}/> : <CartEmpty closeCart={closeCart}/>}
+                    {cartItems.length > 0 ? <Cart openPopupSouces={openPopupSouces}
+                                                  setOpenPopupSouces={setOpenPopupSouces}
+                                                  setOpenPopupInfo={setOpenPopupInfo}
+                                                  openPopupInfo={openPopupInfo}/> :
+                        <CartEmpty closeCart={closeCart}/>}
 
                 </div>
 

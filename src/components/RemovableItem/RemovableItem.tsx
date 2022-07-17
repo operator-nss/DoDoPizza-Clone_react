@@ -2,15 +2,17 @@ import React, {useState} from 'react';
 import clsx from "clsx";
 
 type RemovableItemProps = {
-    title:string
+    title:string,
+    addAdditivities:(title: string) => void
 }
 
-const RemovableItem:React.FC<RemovableItemProps> = ({title}) => {
+const RemovableItem:React.FC<RemovableItemProps> = ({title, addAdditivities}) => {
 
     const [deleteItem, setDeleteItem] = useState(false);
 
    const onClickToggleDelete = () => {
-       setDeleteItem(!deleteItem)
+       setDeleteItem(!deleteItem);
+       addAdditivities(title)
      }
 
     return (

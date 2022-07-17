@@ -1,14 +1,22 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import star from '../../assets/img/star.svg'
 import logo from '../../assets/img/logo.svg'
-import {useAppDispatch} from "../../redux/store";
+import {RootState, useAppDispatch} from "../../redux/store";
 import {setCartOpened} from "../../redux/Slices/cartSlice";
 import clsx from "clsx";
 import {useInView} from "react-intersection-observer";
+import logoDodo from '../../assets/img/logo2.svg';
+import arrowCart from  '../../assets/img/arrow.svg'
+import {useSelector} from "react-redux";
+import {CalcTotalItems} from "../../utils/calcTotalPrice";
 
 
 const Header: React.FC = () => {
     const dispatch = useAppDispatch();
+    const [hoverCart, setHoverCart] = useState(false);
+    const {cartItems} = useSelector((state: RootState) => state.cart);
+
+
     const {ref, inView} = useInView({
         threshold: 0
     });
@@ -16,6 +24,9 @@ const Header: React.FC = () => {
     const openCart = () => {
         dispatch(setCartOpened(true));
     }
+
+
+
 
     return (
 
@@ -69,6 +80,7 @@ const Header: React.FC = () => {
                 <div className="header__container-bottom">
                     <div className="header__menu menu">
                         <nav className="menu__header">
+                            <div className="header__dodo"><img src={logoDodo} alt=""/></div>
                             <ul className="menu__list">
                                 <li className="menu__item"><a href="" className="menu__link">Пицца</a></li>
                                 <li className="menu__item"><a href="" className="menu__link">Комбо</a></li>
@@ -99,7 +111,13 @@ const Header: React.FC = () => {
                         <li className="menu__item"><a href="" className="menu__link">Работа в Додо</a></li>
                     </ul>
                 </div>
-                <button onClick={openCart} className="header__cart button button__orange">Корзина | <span>2</span>
+                <button onClick={openCart}
+                        onMouseOver={() => setHoverCart(true)}
+                        onMouseLeave={() => setHoverCart(false)}
+                        className="header__cart button button__orange"><span className='header__cart-title'>Корзина&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <img className={clsx('header__cart-image', {active:hoverCart})}
+                                      src={arrowCart} alt=""/>
+                    <span className={clsx('header__cart-number', {active:hoverCart})}>  {CalcTotalItems(cartItems)}</span>
                 </button>
                 </div>
                 <div></div>
