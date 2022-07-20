@@ -34,18 +34,8 @@ const Cart: React.FC<CartProps> = ({setOpenPopupInfo,
                                        openPopupSouces,
                                        setOpenPopupSouces
 }) => {
-    const {cartItems, addToOrder} = useSelector((state: RootState) => state.cart);
+    const {cartItems, addToOrder, addSouce} = useSelector((state: RootState) => state.cart);
     const dispatch = useAppDispatch();
-
-
-
-
-    const [addSouce, setAddSouce] = useState([
-        {count: 0, selected: false, id: 0, title: 'Барбекю', price: '35', image: souce01},
-        {count: 0, selected: false, id: 1, title: 'Малиновое варенье\n', price: '35', image: souce02},
-        {count: 0, selected: false, id: 2, title: 'Сырный соус\n', price: '35', image: souce03},
-        {count: 0, selected: false, id: 3, title: 'Ранч/Чесночный\n', price: '35', image: souce04},
-    ]);
 
 
     const writeItem = () => {
@@ -67,14 +57,14 @@ const Cart: React.FC<CartProps> = ({setOpenPopupInfo,
      }
 
 
-     const renderAddableItems = () => {
+     const renderAddableItems = useCallback(() => {
         return  addToOrder.filter(item => !item.selected).map(item => {
              return (
                  <AddOrderItem setOpenPopupSouces={setOpenPopupSouces} key={item.id}
                                {...item}/>
              )
          })
-      }
+      }, [addToOrder, setOpenPopupSouces])
 
     useEffect(() => {
         calcSouces();
@@ -207,8 +197,7 @@ const Cart: React.FC<CartProps> = ({setOpenPopupInfo,
 
                             {addSouce.map(item => {
                                 return (
-                                    <AddSouce addSouce={addSouce} setAddSouce={setAddSouce}
-                                              key={item.id} {...item}/>
+                                    <AddSouce key={item.id} {...item}/>
                                 )
                             })
 

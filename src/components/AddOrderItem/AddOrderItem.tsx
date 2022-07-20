@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import clsx from "clsx";
 import {RootState, useAppDispatch} from "../../redux/store";
-import {setSouceItems, AddableToCart, setAddToOrder} from "../../redux/Slices/cartSlice";
+import {AddableToCart, setAddToOrder,} from "../../redux/Slices/cartSlice";
 import {useSelector} from "react-redux";
 
 type AddOrderItemProps = {
     selected: boolean,
     id: number,
+    realId:number,
     title: string,
     price: string,
     params: string,
@@ -19,6 +20,7 @@ const AddOrderItem: React.FC<AddOrderItemProps> = ({
                                                        id,
                                                        title,
                                                        price,
+                                                       realId,
                                                        params,
                                                        image,
                                                        setOpenPopupSouces
@@ -26,7 +28,7 @@ const AddOrderItem: React.FC<AddOrderItemProps> = ({
 
     const [selectedClass, setSelectedClass] = useState(false);
     const dispatch = useAppDispatch();
-    const {cartItems, addToOrder} = useSelector((state: RootState) => state.cart);
+    const {cartItems, addSouce} = useSelector((state: RootState) => state.cart);
 
 
     const selectItemToOrder = () => {
@@ -35,16 +37,18 @@ const AddOrderItem: React.FC<AddOrderItemProps> = ({
         } else {
             setSelectedClass(!selectedClass);
             const item: AddableToCart = {
+                selected: false,
                 id: cartItems.length + 1,
+                realId,
                 title,
                 price,
                 image,
                 params,
                 count: 1,
-                selected: false,
+
             }
             dispatch(setAddToOrder(item));
-            dispatch(setSouceItems(item))
+            // dispatch(setSouceItems(item))
         }
     }
 

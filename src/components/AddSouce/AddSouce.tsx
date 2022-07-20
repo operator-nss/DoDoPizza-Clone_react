@@ -1,27 +1,35 @@
 import React, {useState} from 'react';
+import {useSelector} from "react-redux";
+import {RootState, useAppDispatch} from "../../redux/store";
+import {AddableToCart, setAddSouce, setSouceItems} from "../../redux/Slices/cartSlice";
 
 type AddSouceProps = {
-    selected: boolean, id: number, title: string, price: string, image: string, setAddSouce: any, addSouce:any[],count:number
+    selected: boolean, id: number,realId:number, title: string, price: string, image: string, count:number
 }
 
-const AddSouce: React.FC<AddSouceProps> = ({selected, id, count, addSouce, setAddSouce, title, price, image}) => {
+const AddSouce: React.FC<AddSouceProps> = ({selected,realId, id, count, title, price, image}) => {
 
     let [souceCount, setSouceCount] = useState(0);
+    const { addSouce, cartItems} = useSelector((state: RootState) => state.cart);
+    const dispatch = useAppDispatch();
+
 
     const plusSouce = () => {
-        setSouceCount(souceCount + 1);
-        setAddSouce([...addSouce], addSouce[id].selected = true, addSouce[id].count = souceCount + 1)
+        const params = null;
+        const item: AddableToCart = {
+            id: cartItems.length + 1,
+            realId,
+            title,
+            price,
+            params,
+            image,
+            count: 1,
+            selected: false,
+        }
+        dispatch(setAddSouce(item));
+        dispatch(setSouceItems(item))
     }
 
-    const minusSouce = () => {
-        if (souceCount >= 1) {
-            setSouceCount(souceCount - 1);
-            setAddSouce([...addSouce], addSouce[id].count = souceCount - 1)
-        }
-        if(souceCount === 1) {
-            setAddSouce([...addSouce], addSouce[id].selected = false, addSouce[id].count = 0)
-        }
-    }
 
     return (
         <div className="popup-order__item">
@@ -34,7 +42,7 @@ const AddSouce: React.FC<AddSouceProps> = ({selected, id, count, addSouce, setAd
                 : (
                     <>
                         <div className="item-order__quantity">
-                            <button onClick={minusSouce} className="quantity__button">&mdash;</button>
+                            <button className="quantity__button">&mdash;</button>
                             <div className="quantity__center">{souceCount}</div>
                             <button onClick={plusSouce} className="quantity__button">+</button>
                         </div>

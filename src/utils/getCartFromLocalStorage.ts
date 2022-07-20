@@ -1,28 +1,48 @@
 import {CalcTotalPrice} from "./calcTotalPrice";
-import {AddableToCart, PizzaCart} from "../redux/Slices/cartSlice";
-import addToOrder01 from "../assets/img/cart/add/01.png";
-import addToOrder02 from "../assets/img/cart/add/02.jpeg";
-import addToOrder03 from "../assets/img/cart/add/03.jpeg";
-import addToOrder04 from "../assets/img/cart/add/04.jpeg";
-import addToOrder05 from "../assets/img/cart/add/05.jpeg";
+import {PizzaCart} from "../redux/Slices/cartSlice";
+import {addSouce, addOrder} from "../Data/vatiables";
+import {nanoid} from "@reduxjs/toolkit";
 
-const addToOrder: ({ image: any; price: string; count: number; id: number; title: string; params: string; selected: boolean } | { image: any; price: string; count: number; id: number; title: string; params: string; selected: boolean } | { image: any; price: string; count: number; id: number; title: string; params: string; selected: boolean } | { image: any; price: string; count: number; id: number; title: string; params: string; selected: boolean } | { image: any; price: string; count: number; id: number; title: string; params: string; selected: boolean })[] =[
-    {selected: false, id: 0, title: 'Соусы', price: '', params: '', image: addToOrder01, count: 0},
-    {selected: false, id: 1, title: 'Картофель из печи', price: '179', params: '160 г', image: addToOrder02, count: 0},
-    {selected: false, id: 2, title: 'Бруслетики, 16шт', price: '205', params: '200 г', image: addToOrder03, count: 0},
-    {selected: false, id: 3, title: 'Додстер', price: '169', params: '', image: addToOrder04, count: 0},
-    {selected: false, id: 4, title: 'Молочный коктейль с печеньем Орео', price: '199', params: '0,3 л', image: addToOrder05, count: 0},
-];
 
 export const getCartFromLocalStorage = () => {
     const data = localStorage.getItem('dodoPizza');
     const items = data ? JSON.parse(data) : [];
     const totalPrice = CalcTotalPrice(items);
+    let arrAdded: any[] = [];
+    let addToOrderItems: { title: any; }[] = [];
+    let newOrderItems: { selected: boolean; id: number; realId: number; title: string; price: string; params: string; image: string; count: number; }[] = [];
+
+    for (let j = 0; j <= addOrder.length; j++) {
+        addToOrderItems = items?.filter((item: any) => {
+            if (item.title === addOrder[j]?.title) {
+                item.selected = true;
+                item.id = nanoid();
+                arrAdded.push(item)
+            }
+
+        })
+    }
+
+const notAddedArr = [];
+   const  addOrderArr = addOrder.sort((a:any, b:any) => a.realId - b.realId);
+   const  arrAddedArr = arrAdded.sort((a:any, b:any) => a.realId - b.realId);
+
+    for(let i = 0; i <= addOrder.length; i++) {
+        if(addOrderArr[i]?.realId !== arrAddedArr[i]?.realId) {
+            notAddedArr.push(addOrderArr[i])
+        }
+    }
+
+    console.log(addOrderArr)
+    console.log(arrAddedArr)
+    console.log(notAddedArr)
+
     return {
         cartItems: items as PizzaCart[],
         totalPrice,
         cartOpened: false,
         statusCart: 'idle',
-        addToOrder
+        addToOrder: [...newOrderItems, ...addToOrderItems],
+        addSouce
     };
 }
