@@ -201,6 +201,17 @@ h6 {
   -o-transition-delay: 0;
   transition-delay: 0;
 }
+
+.header__clone {
+  background-color: #FF6900;
+  height: 50px;
+  width: 100%;
+  color:#fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .header__body {
   display: none;
 }
@@ -227,6 +238,7 @@ h6 {
 .header__logo {
   width: 250px;
   height: 46px;
+  font-size: 40px;
   margin: 0px 40px 0px 0px;
 }
 

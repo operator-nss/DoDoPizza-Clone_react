@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import closeButtonB from "../../assets/img/close-b.svg";
 import info from "../../assets/img/info.svg";
 import dotcoins from "../../assets/img/dotcoins.svg";
@@ -34,22 +34,10 @@ const Cart: React.FC<CartProps> = ({setOpenPopupInfo,
                                        openPopupSouces,
                                        setOpenPopupSouces
 }) => {
-    const {cartItems} = useSelector((state: RootState) => state.cart);
+    const {cartItems, addToOrder} = useSelector((state: RootState) => state.cart);
     const dispatch = useAppDispatch();
-    const [addToOrder, setAddToOrder] = useState([
-        {selected: false, id: 0, title: 'Соусы', price: '', params: '', image: addToOrder01},
-        {selected: false, id: 1, title: 'Картофель из печи', price: '179', params: '160 г', image: addToOrder02},
-        {selected: false, id: 2, title: 'Бруслетики, 16шт', price: '205', params: '200 г', image: addToOrder03},
-        {selected: false, id: 3, title: 'Додстер', price: '169', params: '', image: addToOrder04},
-        {
-            selected: false,
-            id: 4,
-            title: 'Молочный коктейль с печеньем Орео',
-            price: '199',
-            params: '0,3 л',
-            image: addToOrder05
-        },
-    ]);
+
+
 
 
     const [addSouce, setAddSouce] = useState([
@@ -78,9 +66,20 @@ const Cart: React.FC<CartProps> = ({setOpenPopupInfo,
 
      }
 
+
+     const renderAddableItems = () => {
+        return  addToOrder.filter(item => !item.selected).map(item => {
+             return (
+                 <AddOrderItem setOpenPopupSouces={setOpenPopupSouces} key={item.id}
+                               {...item}/>
+             )
+         })
+      }
+
     useEffect(() => {
-        calcSouces()
-    }, [addSouce, calcSouces])
+        calcSouces();
+        renderAddableItems()
+    }, [addSouce, calcSouces, cartItems, renderAddableItems])
 
     const pizzaCountPlus = (id: number) => {
         dispatch(addPizza(id))
@@ -102,8 +101,8 @@ const Cart: React.FC<CartProps> = ({setOpenPopupInfo,
     return (
         <>
             <div className="order__label">
-                {cartItems.length + calcSouces().countSouce} {writeItem()} на&nbsp;
-                { CalcTotalPrice(cartItems) + calcSouces().totalPriceSouces} ₽</div>
+                {cartItems.reduce((num, item) => num + item.count, 0)} {writeItem()} на&nbsp;
+                { CalcTotalPrice(cartItems)} ₽</div>
 
             <div className="order__items">
 
@@ -133,9 +132,9 @@ const Cart: React.FC<CartProps> = ({setOpenPopupInfo,
                                 <div className="item-order__description">
                                     <div className="item-order__title">{title}</div>
                                     <div className="item-order__options">{size} {radius} см, {type} тесто</div>
-                                    <div className="item-order__options">{addableItems.length > 0 ?
+                                    <div className="item-order__options">{addableItems?.length > 0 ?
                                         (<b>Добавить: {addableItems.join(', ')}</b>) : ''}</div>
-                                    <div className="item-order__options">{removeFromPizza.length > 0 ?
+                                    <div className="item-order__options">{removeFromPizza?.length > 0 ?
                                         (`Убрать: ${removeFromPizza.join(', ')}`) : ''}</div>
                                 </div>
                             </div>
@@ -221,12 +220,16 @@ const Cart: React.FC<CartProps> = ({setOpenPopupInfo,
                     </div>
 
 
-                    {addToOrder.map(item => {
-                        return (
-                            <AddOrderItem setOpenPopupSouces={setOpenPopupSouces} key={item.id} addToOrder={addToOrder}
-                                          setAddToOrder={setAddToOrder} {...item}/>
-                        )
-                    })}
+                    {
+                        renderAddableItems()
+                        // addToOrder.filter(item => !item.selected).map(item => {
+                    //     return (
+                    //         <AddOrderItem setOpenPopupSouces={setOpenPopupSouces} key={item.id}
+                    //                       {...item}/>
+                    //     )
+                    // })
+
+                    }
 
 
                 </div>
@@ -248,11 +251,11 @@ const Cart: React.FC<CartProps> = ({setOpenPopupInfo,
 
                     <div className="quantity-end-order__items">
                         <div className="quantity-end-order__dodo dodo-order">
-                            <div className="dodo-order__text">Начислим додокоины</div>
+                            <div className="dodo-order__text">Начислим бонусы</div>
 
                             <div onClick={() => setOpenPopupInfo(false)}
                                  className={clsx({open: openPopupInfo}, 'info-popup dodo-order__popup')}>
-                                Додокоины — валюта, которую можно потратить на подарки в мобильном приложении
+                                Бонусы — валюта, которую можно потратить на подарки в мобильном приложении
                             </div>
 
                             <button onClick={() => setOpenPopupInfo(!openPopupInfo)} className="dodo-order__info">

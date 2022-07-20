@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
-import pizza from "../../assets/img/pizza/indeyka/indeyka-big.jpeg";
 import clsx from "clsx";
+import {RootState, useAppDispatch} from "../../redux/store";
+import {setSouceItems, AddableToCart, setAddToOrder} from "../../redux/Slices/cartSlice";
+import {useSelector} from "react-redux";
 
 type AddOrderItemProps = {
     selected: boolean,
@@ -9,8 +11,6 @@ type AddOrderItemProps = {
     price: string,
     params: string,
     image: string,
-    setAddToOrder: any,
-    addToOrder: any[],
     setOpenPopupSouces: any
 }
 
@@ -21,23 +21,31 @@ const AddOrderItem: React.FC<AddOrderItemProps> = ({
                                                        price,
                                                        params,
                                                        image,
-                                                       setAddToOrder,
-                                                       addToOrder,
                                                        setOpenPopupSouces
                                                    }) => {
 
     const [selectedClass, setSelectedClass] = useState(false);
-
+    const dispatch = useAppDispatch();
+    const {cartItems, addToOrder} = useSelector((state: RootState) => state.cart);
 
 
     const selectItemToOrder = () => {
         if (id === 0) {
             setOpenPopupSouces(true)
         } else {
-            setAddToOrder([...addToOrder], addToOrder[id].selected = !addToOrder[id].selected)
-            setSelectedClass(!selectedClass)
+            setSelectedClass(!selectedClass);
+            const item: AddableToCart = {
+                id: cartItems.length + 1,
+                title,
+                price,
+                image,
+                params,
+                count: 1,
+                selected: false,
+            }
+            dispatch(setAddToOrder(item));
+            dispatch(setSouceItems(item))
         }
-
     }
 
     return (

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import star from '../../assets/img/star.svg'
 import logo from '../../assets/img/logo.svg'
 import {RootState, useAppDispatch} from "../../redux/store";
@@ -6,7 +6,7 @@ import {setCartOpened} from "../../redux/Slices/cartSlice";
 import clsx from "clsx";
 import {useInView} from "react-intersection-observer";
 import logoDodo from '../../assets/img/logo2.svg';
-import arrowCart from  '../../assets/img/arrow.svg'
+import arrowCart from '../../assets/img/arrow.svg'
 import {useSelector} from "react-redux";
 import {CalcTotalItems} from "../../utils/calcTotalPrice";
 
@@ -31,12 +31,13 @@ const Header: React.FC = () => {
     return (
 
         <header className="header">
+            <div className="header__clone">ВНИМАНИЕ! ЭТОТ САЙТ СОЗДАН В УЧЕБНЫХ ЦЕЛЯХ. ФУНКЦИОНАЛ ОПЛАТЫ НЕ РАБОТАЕТ</div>
             <div className="header__container">
 
                 <div ref={ref} className="header__top">
                     <div className="header__left">
                         <div className="header__logo">
-                            <img src={logo} alt="картинка"/>
+                            React Pizza
                         </div>
                         <div className="header__delivery delivery-header">
                             <div className="delivery-header__label">
@@ -64,7 +65,7 @@ const Header: React.FC = () => {
                                           fill="#000"></path>
                                 </svg>
                             </div>
-                            <div className="dodocoins-header__title">Додокоины</div>
+                            <div className="dodocoins-header__title">Бонусы</div>
                         </div>
 
                         <button className="header__user button">Войти</button>
@@ -80,7 +81,7 @@ const Header: React.FC = () => {
                 <div className="header__container-bottom">
                     <div className="header__menu menu">
                         <nav className="menu__header">
-                            <div className="header__dodo"><img src={logoDodo} alt=""/></div>
+                            <div className="header__dodo">React Pizza</div>
                             <ul className="menu__list">
                                 <li className="menu__item"><a href="" className="menu__link">Пицца</a></li>
                                 <li className="menu__item"><a href="" className="menu__link">Комбо</a></li>
@@ -91,7 +92,7 @@ const Header: React.FC = () => {
                                 <li className="menu__item"><a href="" className="menu__link">Акции</a></li>
                                 <li className="menu__item"><a href="" className="menu__link">Контакты</a></li>
                                 <li className="menu__item"><a href="" className="menu__link">О нас</a></li>
-                                <li className="menu__item"><a href="" className="menu__link">Работа в Додо</a></li>
+                                <li className="menu__item"><a href="" className="menu__link">Работа у нас</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -108,7 +109,7 @@ const Header: React.FC = () => {
                         <li className="menu__item"><a href="" className="menu__link">Акции</a></li>
                         <li className="menu__item"><a href="" className="menu__link">Контакты</a></li>
                         <li className="menu__item"><a href="" className="menu__link">О нас</a></li>
-                        <li className="menu__item"><a href="" className="menu__link">Работа в Додо</a></li>
+                        <li className="menu__item"><a href="" className="menu__link">Работа у нас</a></li>
                     </ul>
                 </div>
                 <button onClick={openCart}

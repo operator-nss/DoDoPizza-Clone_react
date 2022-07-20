@@ -20,7 +20,7 @@ const Footer = () => {
                     <div className="secret-footer__image">
                         <img src={secret} alt="" />
                     </div>
-                    <div className="secret-footer__text">Стань тайным покупателем Додо Пиццы и получи пиццу в подарок
+                    <div className="secret-footer__text">Стань тайным покупателем Нашей Пиццы и получи пиццу в подарок
                     </div>
                     <a href="#" className="secret-footer__button button">Заполнить анкету</a>
                 </div>
@@ -32,19 +32,19 @@ const Footer = () => {
 
                     <div className="links-footer__columns">
                         <div className="links-footer__column column-footer">
-                            <div className="column-footer__title">Додо Пицца</div>
+                            <div className="column-footer__title">Реакт Пицца</div>
                             <ul className="column-footer__list">
                                 <li className="column-footer__item">
                                     <a href="" className="column-footer__link">О нас</a>
                                 </li>
                                 <li className="column-footer__item">
-                                    <a href="" className="column-footer__link">Додо-книга</a>
+                                    <a href="" className="column-footer__link">книга</a>
                                 </li>
                                 <li className="column-footer__item">
                                     <a href="" className="column-footer__link">Блог «Сила ума»</a>
                                 </li>
                                 <li className="column-footer__item">
-                                    <a href="" className="column-footer__link">Додо ИС</a>
+                                    <a href="" className="column-footer__link">ИС</a>
                                 </li>
                             </ul>
                         </div>
@@ -109,7 +109,7 @@ const Footer = () => {
                             </a>
                         </div>
                         <a href="mailto:feedback@dodopizza.com"
-                           className="download-footer__mail">feedback@dodopizza.com</a>
+                           className="download-footer__mail">mail.com</a>
                     </div>
 
 
@@ -139,7 +139,7 @@ const Footer = () => {
             <div className="footer__copy copy-footer">
                 <div className="copy-footer__container">
                     <div className="copy-footer__logo">
-                        <img src={dodofooter} alt="" />
+                        React Pizza
                             <pre>© 2022</pre>
                     </div>
 
