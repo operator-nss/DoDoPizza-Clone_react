@@ -14,7 +14,7 @@ export const addOrder = [
     {selected: false, id: 0, realId: 0, title: 'Соусы', price: '', params: '', image: addToOrder01, count: 0},
     {selected: false, id: 1, realId: 1, title: 'Картофель из печи', price: '179', params: '160 г', image: addToOrder02, count: 0},
     {selected: false, id: 2, realId: 2, title: 'Бруслетики, 16шт', price: '205', params: '200 г', image: addToOrder03, count: 0},
-    {selected: false, id: 3, realId: 3, title: 'Додстер', price: '169', params: '', image: addToOrder04, count: 0},
+    {selected: false, id: 3, realId: 3, title: 'Шавуха', price: '169', params: '', image: addToOrder04, count: 0},
     {selected: false, id: 4, realId: 4, title: 'Молочный коктейль с печеньем Орео', price: '199', params: '0,3 л',image: addToOrder05, count: 0},
 ];
 

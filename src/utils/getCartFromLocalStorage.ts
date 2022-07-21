@@ -33,16 +33,17 @@ const notAddedArr = [];
         }
     }
 
-    console.log(addOrderArr)
+    const difference = addOrderArr.filter(ar => !arrAddedArr.find(rm => (rm.realId === ar.realId && ar.title === rm.title) ))
+
+    console.log(difference)
     console.log(arrAddedArr)
-    console.log(notAddedArr)
 
     return {
         cartItems: items as PizzaCart[],
         totalPrice,
         cartOpened: false,
         statusCart: 'idle',
-        addToOrder: [...newOrderItems, ...addToOrderItems],
+        addToOrder: [...difference],
         addSouce
     };
 }
