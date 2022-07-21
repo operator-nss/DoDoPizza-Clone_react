@@ -8,6 +8,7 @@ import clsx from "clsx";
 import {setCartOpened} from "../../redux/Slices/cartSlice";
 import Cart from "./Cart";
 import CartEmpty from "./CartEmpty";
+import {isMobile} from "react-device-detect";
 
 
 const CartContainer: React.FC = () => {
@@ -24,7 +25,7 @@ const CartContainer: React.FC = () => {
     }
 
     useEffect(() => {
-        if (cartOpened) {
+        if (cartOpened && !isMobile) {
             document.body.style.overflow = "hidden";
             document.body.style.paddingRight = '17px';
         } else {

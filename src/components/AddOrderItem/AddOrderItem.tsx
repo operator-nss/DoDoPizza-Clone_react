@@ -48,7 +48,6 @@ const AddOrderItem: React.FC<AddOrderItemProps> = ({
 
             }
             dispatch(setAddToOrder(item));
-            // dispatch(setSouceItems(item))
         }
     }
 

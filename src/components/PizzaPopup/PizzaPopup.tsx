@@ -27,6 +27,7 @@ import RemovableItem from "../RemovableItem/RemovableItem";
 import {useSelector} from "react-redux";
 import {RootState, useAppDispatch} from "../../redux/store";
 import {PizzaCart, setCartItems} from "../../redux/Slices/cartSlice";
+import {useDebouncedCallback} from "use-debounce";
 
 type PizzaPopupProps = {
     openPopup: boolean,
@@ -65,6 +66,7 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
         const [activeSize, setActiveSize] = useState(1);
         const [activeType, setActiveType] = useState(0);
         const [openPopupInfo, setOpenPopupInfo] = useState(false);
+        const [openPopupSend, setOpenPopupSend] = useState(false);
         const [calcPopup, setCalcPopup] = useState(0);
         const [addableItems, setAddableItems] = useState([
             {selected: false, id: 0, title: 'Чеддер и пармезан', price: '59', image: add01},
@@ -90,6 +92,10 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
         const [activeImage, setActiveImage] = useState('');
 
 
+        const debounced = useDebouncedCallback(() => {
+            setOpenPopupSend(false);
+        }, 4000);
+
         const sizes = ['Маленькая', 'Средняя', 'Большая'];
         const types = ['Традиционное', 'Тонкое'];
         const radius = [25, 30, 35];
@@ -98,7 +104,7 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
 
 
         const onClickClosePopup = () => {
-            setOpenPopup(false)
+            setOpenPopup(false);
         }
 
 
@@ -166,10 +172,13 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
                 addableItems: arr,
                 count: 1
             }
+            setOpenPopupSend(true);
+            debounced();
             dispatch(setCartItems(item));
             setOpenPopup(false);
-            setActiveSize(1);
-            setActiveType(0);
+            // setActiveSize(1);
+            // setActiveType(0);
+
         }
 
         const addAdditivities = (title: string) => {
@@ -187,10 +196,17 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
                      style={openPopup ? {'visibility': 'visible'} : {'visibility': 'hidden'}}
                      className={clsx({open: openPopup}, "pizza__overlay")}></div>
 
+
+                <div className={clsx('popup-pizza__send', {active: openPopupSend})}>
+                    <div>Добавлено:</div>
+                    <div>{title}, {radius[activeSize]}см</div>
+                </div>
+
                 <div className={clsx({open: openPopup}, "pizza__popup popup-pizza")}>
                     <button onClick={onClickClosePopup} className="popup-pizza__close">
                         <img src={closeButton} alt="картинка"/>
                     </button>
+
 
                     <div className="popup-pizza__image">
                         <div className="popup-pizza__circle-med">

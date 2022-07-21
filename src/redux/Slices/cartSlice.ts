@@ -1,7 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {getCartFromLocalStorage} from "../../utils/getCartFromLocalStorage";
-import {addSouce} from "../../Data/vatiables";
-
 
 
 export type PizzaCart = {
@@ -15,7 +13,7 @@ export type PizzaCart = {
     addableItems: string[],
     count: number,
     realId: number,
-    id: number,
+    id: number | string,
 }
 
 export type AddableToCart = {
@@ -65,24 +63,53 @@ export const cartSlice = createSlice({
         setStatusCart: (state, action: PayloadAction<string>) => {
             state.statusCart = action.payload;
         },
-        addPizza: (state, action: PayloadAction<number>) => {
+        addPizza: (state, action: PayloadAction<number | string>) => {
             const findItem = state.cartItems.find(item => item.id === action.payload);
+            const findSouce = state.addSouce.find(item => item.id === action.payload);
             if (findItem) {
                 findItem.count++;
             }
+            if (findSouce) {
+                findSouce.count++;
+            }
+
         },
-        minusPizza: (state, action: PayloadAction<number>) => {
+        minusPizza: (state, action: PayloadAction<number | string>) => {
             const findItem = state.cartItems.find(item => item.id === action.payload);
+            const findSouce = state.addSouce.find(item => item.id === action.payload);
             if (findItem) {
                 findItem.count > 1 ? findItem.count-- : findItem.count = 1;
-
+            }
+            if (findSouce) {
+                findSouce.count > 1 ? findSouce.count-- : findSouce.count = 1;
             }
         },
-        deletePizza: (state, action: PayloadAction<number>) => {
+        minusSouce: (state, action: PayloadAction<number | string>) => {
+            const findItem = state.cartItems.find(item => item.id === action.payload);
+            const findSouce = state.addSouce.find(item => item.id === action.payload);
+            if (findItem) {
+                findItem.count--;
+                findSouce.count--;
+            }
+        },
+        deletePizza: (state, action: PayloadAction<number | string>) => {
             const newArr = state.cartItems.filter(item => item.id !== action.payload);
 
             const newObj = state.cartItems.filter(item => item.id === action.payload);
-            const newArrayToOrder = state.addToOrder.filter(item => item.title !== newObj[0].title)
+
+            const findSouce = state.addSouce.find(item => item.id === action.payload);
+            if(findSouce) {
+                const newObjSouce = state.cartItems.filter(item => item.id === action.payload);
+                const newArrayToOrder = state.addSouce.filter(item => item.title !== newObjSouce[0].title);
+                if(newObjSouce && newObjSouce[0].selected === true) {
+                    newObjSouce[0].selected = false;
+                    newObjSouce[0].id = newObjSouce[0].realId;
+                    newObjSouce[0].count = 0;
+                    state.addSouce = [...newArrayToOrder, newObjSouce[0]];
+                }
+            }
+
+            const newArrayToOrder = state.addToOrder.filter(item => item.title !== newObj[0].title);
             if(newObj && newObj[0].selected === true) {
                 newObj[0].selected = false;
                 newObj[0].id = state.addToOrder.length;
@@ -90,12 +117,25 @@ export const cartSlice = createSlice({
             }
             state.cartItems = [...newArr];
         },
+        deleteSouce:(state, action: PayloadAction<number | string>) => {
+            const newArr = state.cartItems.filter(item => item.id !== action.payload);
+            const findSouce = state.addSouce.find(item => item.id === action.payload);
+            const newObj = state.cartItems.filter(item => item.id === action.payload);
+            const newArrayToOrder = state.addSouce.filter(item => item.title !== newObj[0].title);
+            if(newObj && newObj[0].selected === true) {
+                newObj[0].selected = false;
+                newObj[0].id = newObj[0].realId;
+                newObj[0].count = 0;
+                state.addSouce = [...newArrayToOrder, newObj[0]];
+            }
+            state.cartItems = [...newArr];
+
+        },
         setSouceItems: (state, action: PayloadAction<AddableToCart>) => {
             const findItem = state.cartItems.find(item => item.title === action.payload.title);
-            const findAddable = state.addToOrder.find(item => item.title === action.payload.title);
-            findAddable.selected = true;
-            // const findAddableSouce = state.addSouce.find(item => item.title === action.payload.title);
-            // findAddableSouce.selected = true;
+            const findSouce = state.addSouce.find(item => item.id === action.payload.id);
+            findSouce.selected = true;
+            findSouce.count = findSouce.count + 1;
             if (findItem) {
                 findItem.count++;
             } else {
@@ -147,6 +187,8 @@ export const {setCartItems,
     deletePizza,
     setSouceItems,
     addPizza,
-    minusPizza} = cartSlice.actions
+    minusPizza,
+    minusSouce,
+    deleteSouce} = cartSlice.actions
 
 export default cartSlice.reducer

@@ -19,9 +19,9 @@ export const addOrder = [
 ];
 
 export const addSouce = [
-    {count: 0, selected: false, id: 0, realId: 0, title: 'Барбекю', price: '35', image: souce01},
-    {count: 0, selected: false, id: 1, realId: 1, title: 'Малиновое варенье\n', price: '35', image: souce02},
-    {count: 0, selected: false, id: 2, realId: 2, title: 'Сырный соус\n', price: '35', image: souce03},
-    {count: 0, selected: false, id: 3, realId: 3, title: 'Ранч/Чесночный\n', price: '35', image: souce04},
+    {count: 0, selected: false, id: 's0', realId: 's0', title: 'Барбекю', price: '35', image: souce01},
+    {count: 0, selected: false, id: 's1', realId: 's1', title: 'Малиновое варенье', price: '35', image: souce02},
+    {count: 0, selected: false, id: 's2', realId: 's2', title: 'Сырный соус', price: '35', image: souce03},
+    {count: 0, selected: false, id: 's3', realId: 's3', title: 'Ранч/Чесночный', price: '35', image: souce04},
 ];
 

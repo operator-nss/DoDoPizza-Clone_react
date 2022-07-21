@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PizzaPopup from "../PizzaPopup/PizzaPopup";
-
+import {isMobile} from 'react-device-detect';
 type PizzaCardProps = {
     imageUrl: string,
     realId: number,
@@ -34,7 +34,7 @@ const PizzaCard: React.FC<PizzaCardProps> = ({
     const [openPopup, setOpenPopup] = useState(false);
 
     useEffect(() => {
-        if (openPopup) {
+        if (openPopup && !isMobile) {
             document.body.style.overflow = "hidden";
             document.body.style.paddingRight = '17px';
         } else {

@@ -12,8 +12,6 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            {/*TODO сделать чтобы попап закрывался на попап пицце после закрытия пиццы*/}
-            {/*TODO попап сделать при отправке пиццы в корзины*/}
             <App/>
         </Provider>
     </React.StrictMode>

@@ -9,8 +9,11 @@ export const getCartFromLocalStorage = () => {
     const items = data ? JSON.parse(data) : [];
     const totalPrice = CalcTotalPrice(items);
     let arrAdded: any[] = [];
+    let arrSouceAdded: any[] = [];
     let addToOrderItems: { title: any; }[] = [];
-    let newOrderItems: { selected: boolean; id: number; realId: number; title: string; price: string; params: string; image: string; count: number; }[] = [];
+    // let newOrderItems: { selected: boolean; id: number; realId: number; title: string; price: string; params: string; image: string; count: number; }[] = [];
+
+    let addSouceArr = [];
 
     for (let j = 0; j <= addOrder.length; j++) {
         addToOrderItems = items?.filter((item: any) => {
@@ -23,20 +26,32 @@ export const getCartFromLocalStorage = () => {
         })
     }
 
-const notAddedArr = [];
-   const  addOrderArr = addOrder.sort((a:any, b:any) => a.realId - b.realId);
-   const  arrAddedArr = arrAdded.sort((a:any, b:any) => a.realId - b.realId);
+    for (let j = 0; j <= addSouce.length; j++) {
+        addSouceArr = items?.filter((item: any) => {
+            if (item.title === addSouce[j]?.title) {
+                item.selected = true;
+                item.id = nanoid();
+                arrSouceAdded.push(item)
+            }
 
-    for(let i = 0; i <= addOrder.length; i++) {
-        if(addOrderArr[i]?.realId !== arrAddedArr[i]?.realId) {
+        })
+    }
+
+    const differenceSouce = addSouce.filter(ar => !arrSouceAdded.find(rm => (rm.realId === ar.realId && ar.title === rm.title)))
+
+
+    const notAddedArr = [];
+    const addOrderArr = addOrder.sort((a: any, b: any) => a.realId - b.realId);
+    const arrAddedArr = arrAdded.sort((a: any, b: any) => a.realId - b.realId);
+
+    for (let i = 0; i <= addOrder.length; i++) {
+        if (addOrderArr[i]?.realId !== arrAddedArr[i]?.realId) {
             notAddedArr.push(addOrderArr[i])
         }
     }
 
-    const difference = addOrderArr.filter(ar => !arrAddedArr.find(rm => (rm.realId === ar.realId && ar.title === rm.title) ))
+    const difference = addOrderArr.filter(ar => !arrAddedArr.find(rm => (rm.realId === ar.realId && ar.title === rm.title)))
 
-    console.log(difference)
-    console.log(arrAddedArr)
 
     return {
         cartItems: items as PizzaCart[],
@@ -44,6 +59,6 @@ const notAddedArr = [];
         cartOpened: false,
         statusCart: 'idle',
         addToOrder: [...difference],
-        addSouce
+        addSouce: [...arrSouceAdded, ...differenceSouce]
     };
 }

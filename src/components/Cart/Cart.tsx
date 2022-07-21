@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import closeButtonB from "../../assets/img/close-b.svg";
 import info from "../../assets/img/info.svg";
 import dotcoins from "../../assets/img/dotcoins.svg";
@@ -7,15 +7,6 @@ import {RootState, useAppDispatch} from "../../redux/store";
 import {CalcTotalPrice} from "../../utils/calcTotalPrice";
 import {addPizza, deletePizza, minusPizza} from "../../redux/Slices/cartSlice";
 import clsx from "clsx";
-import addToOrder01 from '../../assets/img/cart/add/01.png';
-import addToOrder02 from '../../assets/img/cart/add/02.jpeg';
-import addToOrder03 from '../../assets/img/cart/add/03.jpeg';
-import addToOrder04 from '../../assets/img/cart/add/04.jpeg';
-import addToOrder05 from '../../assets/img/cart/add/05.jpeg';
-import souce01 from '../../assets/img/cart/add/souce/01.jpg';
-import souce02 from '../../assets/img/cart/add/souce/02.jpg';
-import souce03 from '../../assets/img/cart/add/souce/03.jpg';
-import souce04 from '../../assets/img/cart/add/souce/04.png';
 import AddOrderItem from "../AddOrderItem/AddOrderItem";
 import AddSouce from "../AddSouce/AddSouce";
 
@@ -71,7 +62,7 @@ const Cart: React.FC<CartProps> = ({setOpenPopupInfo,
         renderAddableItems()
     }, [addSouce, calcSouces, cartItems, renderAddableItems])
 
-    const pizzaCountPlus = (id: number) => {
+    const pizzaCountPlus = (id: number | string) => {
         dispatch(addPizza(id))
     }
 
@@ -141,39 +132,6 @@ const Cart: React.FC<CartProps> = ({setOpenPopupInfo,
                         </div>
                     })}
 
-                    {addSouce.filter(item => item.selected).map(item => {
-                        const {
-                            title,
-                            price,
-                            image,
-                            count,
-                            id
-                        } = item;
-                        return <div key={id} className="order__item item-order">
-                            <div className="item-order__top">
-                                <button className="item-order__close">
-                                    <img src={closeButtonB} alt="картинка"/>
-                                </button>
-                                <div className="item-order__image-ibg">
-                                    <img src={image} alt="картинка"/>
-                                </div>
-                                <div className="item-order__description">
-                                    <div className="item-order__title">Соус {title}</div>
-                                </div>
-                            </div>
-
-                            <div className="item-order__bottom">
-                                <div className="item-order__price">{+price * count} ₽</div>
-                                <div className="item-order__quantity">
-                                    <button
-                                        className="quantity__button">&mdash;</button>
-                                    <div className="quantity__center">{count}</div>
-                                    <button className="quantity__button">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    })
-                    }
                 </>
             </div>
 
@@ -181,7 +139,7 @@ const Cart: React.FC<CartProps> = ({setOpenPopupInfo,
                 <div className="add-order__title">Добавить к заказу?</div>
 
                 <div className="add-order__items">
-
+                    {renderAddableItems()}
 
                     <div
                         onClick={closePopupSouce}
@@ -200,25 +158,10 @@ const Cart: React.FC<CartProps> = ({setOpenPopupInfo,
                                     <AddSouce key={item.id} {...item}/>
                                 )
                             })
-
                             }
-
-
                         </div>
 
                     </div>
-
-
-                    {
-                        renderAddableItems()
-                        // addToOrder.filter(item => !item.selected).map(item => {
-                    //     return (
-                    //         <AddOrderItem setOpenPopupSouces={setOpenPopupSouces} key={item.id}
-                    //                       {...item}/>
-                    //     )
-                    // })
-
-                    }
 
 
                 </div>

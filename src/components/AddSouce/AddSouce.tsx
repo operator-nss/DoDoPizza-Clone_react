@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector} from "react-redux";
 import {RootState, useAppDispatch} from "../../redux/store";
-import {AddableToCart, setAddSouce, setSouceItems} from "../../redux/Slices/cartSlice";
+import {AddableToCart, minusSouce, deletePizza, setSouceItems, deleteSouce} from "../../redux/Slices/cartSlice";
 
 type AddSouceProps = {
     selected: boolean, id: number,realId:number, title: string, price: string, image: string, count:number
@@ -13,11 +13,15 @@ const AddSouce: React.FC<AddSouceProps> = ({selected,realId, id, count, title, p
     const { addSouce, cartItems} = useSelector((state: RootState) => state.cart);
     const dispatch = useAppDispatch();
 
+    useEffect(() => {
+        setSouceCount(count)
+    }, [count])
+
 
     const plusSouce = () => {
         const params = null;
         const item: AddableToCart = {
-            id: cartItems.length + 1,
+            id,
             realId,
             title,
             price,
@@ -26,9 +30,18 @@ const AddSouce: React.FC<AddSouceProps> = ({selected,realId, id, count, title, p
             count: 1,
             selected: false,
         }
-        dispatch(setAddSouce(item));
+        if(souceCount === 0) {
+            setSouceCount(1)
+        }
+        setSouceCount(souceCount + 1)
         dispatch(setSouceItems(item))
     }
+
+    const minusSouceButton = () => {
+
+        setSouceCount(souceCount => souceCount - 1);
+        souceCount > 1 ? dispatch(minusSouce(id)) : dispatch(deleteSouce(id))
+     }
 
 
     return (
@@ -38,13 +51,13 @@ const AddSouce: React.FC<AddSouceProps> = ({selected,realId, id, count, title, p
             </div>
             <div className="popup-order__name">{title}</div>
             {souceCount === 0 ?
-                <button onClick={plusSouce} className="popup-order__price button button__check">{price} ₽</button>
+                <button onClick={() => plusSouce()} className="popup-order__price button button__check">{price} ₽</button>
                 : (
                     <>
                         <div className="item-order__quantity">
-                            <button className="quantity__button">&mdash;</button>
+                            <button onClick={minusSouceButton} className="quantity__button">&mdash;</button>
                             <div className="quantity__center">{souceCount}</div>
-                            <button onClick={plusSouce} className="quantity__button">+</button>
+                            <button onClick={() => plusSouce()} className="quantity__button">+</button>
                         </div>
                     </>
                 )

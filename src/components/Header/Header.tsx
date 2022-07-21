@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import star from '../../assets/img/star.svg'
-import logo from '../../assets/img/logo.svg'
+import logo from '../../assets/img/bird.png'
 import {RootState, useAppDispatch} from "../../redux/store";
 import {setCartOpened} from "../../redux/Slices/cartSlice";
 import clsx from "clsx";
 import {useInView} from "react-intersection-observer";
-import logoDodo from '../../assets/img/logo2.svg';
 import arrowCart from '../../assets/img/arrow.svg'
 import {useSelector} from "react-redux";
 import {CalcTotalItems} from "../../utils/calcTotalPrice";
@@ -38,6 +37,7 @@ const Header: React.FC = () => {
                     <div className="header__left">
                         <div className="header__logo">
                             React Pizza
+                            <img src={logo} alt=""/>
                         </div>
                         <div className="header__delivery delivery-header">
                             <div className="delivery-header__label">
@@ -81,7 +81,7 @@ const Header: React.FC = () => {
                 <div className="header__container-bottom">
                     <div className="header__menu menu">
                         <nav className="menu__header">
-                            <div className="header__dodo">React Pizza</div>
+                            <div className="header__dodo"><img src={logo} alt=""/></div>
                             <ul className="menu__list">
                                 <li className="menu__item"><a href="" className="menu__link">Пицца</a></li>
                                 <li className="menu__item"><a href="" className="menu__link">Комбо</a></li>

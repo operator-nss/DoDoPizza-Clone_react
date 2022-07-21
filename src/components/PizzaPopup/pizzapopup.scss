@@ -38,6 +38,52 @@
     opacity: 1;
     visibility: visible;
   }
+  &__send {
+    position: fixed;
+    left: 70vw;
+    top: 10vh;
+    background-color: #383637;
+    z-index: 10;
+    border-radius: 15px;
+    padding: 15px;
+    opacity: 0;
+    transition: all 0.3s ease 0s;
+    color: #fff;
+    font-size: 14px;
+    line-height: 150%;
+    visibility: hidden;
+    &.active {
+      opacity: 1;
+      visibility: visible;
+      -webkit-animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) 3s both;
+      animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) 3s both;
+    }
+  }
+}
+
+@-webkit-keyframes slide-out-top {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+}
+@keyframes slide-out-top {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
+    opacity: 0;
+  }
 }
 
 .popup-pizza__close {
