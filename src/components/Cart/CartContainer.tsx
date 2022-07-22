@@ -9,11 +9,12 @@ import {setCartOpened} from "../../redux/Slices/cartSlice";
 import Cart from "./Cart";
 import CartEmpty from "./CartEmpty";
 import {isMobile} from "react-device-detect";
+import Preloader from "../Preloader/Preloader";
 
 
 const CartContainer: React.FC = () => {
     const dispatch = useAppDispatch();
-    const {cartOpened, cartItems} = useSelector((state: RootState) => state.cart);
+    const {cartOpened, cartItems, statusCart} = useSelector((state: RootState) => state.cart);
     const [openPopupInfo, setOpenPopupInfo] = useState(false);
     const [openPopupSouces, setOpenPopupSouces] = useState(false);
 
@@ -37,18 +38,20 @@ const CartContainer: React.FC = () => {
     }, [cartOpened])
 
 
+
     return (
         <>
             <div onClick={closeCart} style={cartOpened ? {'visibility': 'visible'} : {'visibility': 'hidden'}}
                  className={clsx({open: cartOpened}, "cart__overlay")}></div>
 
 
-            <div className={clsx({open: cartOpened}, "cart")}>
+            <div className={clsx({open: cartOpened},{loading: statusCart === 'cart loading'}, "cart")}>
 
                 <button onClick={closeCart} className="cart__close">
                     <img src={closeButton} alt="картинка"/>
                 </button>
 
+                {statusCart === 'cart loading' ? <Preloader /> :
                 <div className="cart__body">
 
                     {cartItems.length > 0 ? <Cart openPopupSouces={openPopupSouces}
@@ -58,7 +61,7 @@ const CartContainer: React.FC = () => {
                         <CartEmpty closeCart={closeCart}/>}
 
                 </div>
-
+                }
             </div>
         </>
     );

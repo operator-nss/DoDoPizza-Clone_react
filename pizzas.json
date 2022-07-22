@@ -9,9 +9,20 @@
   "image20": "https://dodopizza-a.akamaihd.net/static/Img/Products/a3073c9ade80457cb3d841d036f1f272_584x584.jpeg",
   "image21": "https://dodopizza-a.akamaihd.net/static/Img/Products/f63df89192574238b922fb71426acc14_584x584.jpeg",
   "title": "Индейка с овощами гриль",
-  "additives": ["моцарелла, томатный соус"],
-  "removable" : ["пастрами из индейки"," овощи-гриль"," кубики брынзы"],
-  "compound": [216, 9.5, 6.4, 28.8],
+  "additives": [
+   "моцарелла, томатный соус"
+  ],
+  "removable": [
+   "пастрами из индейки",
+   " овощи-гриль",
+   " кубики брынзы"
+  ],
+  "compound": [
+   216,
+   9.5,
+   6.4,
+   28.8
+  ],
   "weight": [
    310,
    490,
@@ -26,7 +37,11 @@
    30,
    35
   ],
-  "price": [489, 739, 889],
+  "price": [
+   489,
+   739,
+   889
+  ],
   "category": 3,
   "rating": 4
  },
@@ -40,9 +55,18 @@
   "image20": "https://dodopizza-a.akamaihd.net/static/Img/Products/85e69e1da61e4d5ab1bd5d049557adb5_584x584.jpeg",
   "image21": "https://dodopizza-a.akamaihd.net/static/Img/Products/1d6ed3677f01493d801ef11e1ebea0a6_584x584.jpeg",
   "title": "Белая пепперони",
-   "additives": ["соус альфредо, моцарелла"],
-  "removable" : ["Пикантная пепперони"],
-  "compound": [313.6, 10.8, 13.4, 35.4],
+  "additives": [
+   "соус альфредо, моцарелла"
+  ],
+  "removable": [
+   "Пикантная пепперони"
+  ],
+  "compound": [
+   313.6,
+   10.8,
+   13.4,
+   35.4
+  ],
   "weight": [
    310,
    490,
@@ -56,7 +80,11 @@
    30,
    35
   ],
-  "price": [439, 669, 829],
+  "price": [
+   439,
+   669,
+   829
+  ],
   "category": 3,
   "rating": 6
  },
@@ -64,15 +92,24 @@
   "id": 2,
   "realId": 2,
   "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/5630c6ed3f394c7ba25e1ef79a67b7ee_292x292.jpeg",
-  "image00": "https://dodopizza-a.akamaihd.net/static/Img/Products/45d83e4ca66e4f0796724f92da65e3d4_584x584.jpeg",
+  "image00": "https://cdn.dodostatic.net/static/Img/Products/45d83e4ca66e4f0796724f92da65e3d4_584x584.jpeg",
   "image10": "https://dodopizza-a.akamaihd.net/static/Img/Products/5630c6ed3f394c7ba25e1ef79a67b7ee_584x584.jpeg",
-  "image11": "https://dodopizza-a.akamaihd.net/static/Img/Products/cc247a55820e4ea9af58887e8d3c674a_584x584.jpeg",
-  "image20": "https://dodopizza-a.akamaihd.net/static/Img/Products/17eae1efb76e4a468ddf5709c83af21b_584x584.jpeg",
-  "image21": "https://dodopizza-a.akamaihd.net/static/Img/Products/3bf35e0746184fb0bd5077ac8f34dd6d_584x584.jpeg",
+  "image11": "https://cdn.dodostatic.net/static/Img/Products/cc247a55820e4ea9af58887e8d3c674a_584x584.jpeg",
+  "image20": "https://cdn.dodostatic.net/static/Img/Products/17eae1efb76e4a468ddf5709c83af21b_584x584.jpeg",
+  "image21": "https://cdn.dodostatic.net/static/Img/Products/3bf35e0746184fb0bd5077ac8f34dd6d_584x584.jpeg",
   "title": "Ветчина и сыр",
-   "additives": ["моцарелла, соус альфредо"],
-  "removable" : ["Ветчина"],
-  "compound": [276.3, 10.3, 9.9, 34.7],
+  "additives": [
+   "моцарелла, соус альфредо"
+  ],
+  "removable": [
+   "Ветчина"
+  ],
+  "compound": [
+   276.3,
+   10.3,
+   9.9,
+   34.7
+  ],
   "weight": [
    330,
    500,
@@ -86,13 +123,17 @@
    30,
    35
   ],
-  "price": [329, 539, 649],
+  "price": [
+   329,
+   539,
+   649
+  ],
   "category": 1,
   "rating": 4
  },
  {
   "id": 3,
-  "realId":3,
+  "realId": 3,
   "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/10abc7eb6428475c9263709a1266558c_292x292.jpeg",
   "image00": "https://dodopizza-a.akamaihd.net/static/Img/Products/12ad45002ecb42e28279080dedd1d1ea_584x584.jpeg",
   "image10": "https://dodopizza-a.akamaihd.net/static/Img/Products/10abc7eb6428475c9263709a1266558c_584x584.jpeg",
@@ -100,9 +141,16 @@
   "image20": "https://dodopizza-a.akamaihd.net/static/Img/Products/a72d6559853f4d868dd6c030995260e2_584x584.jpeg",
   "image21": "https://dodopizza-a.akamaihd.net/static/Img/Products/1b2989f4c4404d87b278eb40b519d163_584x584.jpeg",
   "title": "Сырная 🌱👶",
-   "additives": ["Моцарелла, сыры чеддер и пармезан, соус альфредо"],
-   "removable" : [],
-  "compound": [280.7, 10.2, 10.4, 34.7],
+  "additives": [
+   "Моцарелла, сыры чеддер и пармезан, соус альфредо"
+  ],
+  "removable": [],
+  "compound": [
+   280.7,
+   10.2,
+   10.4,
+   34.7
+  ],
   "types": [
    1
   ],
@@ -116,7 +164,11 @@
    30,
    35
   ],
-  "price": [299, 519, 639],
+  "price": [
+   299,
+   519,
+   639
+  ],
   "category": 2,
   "rating": 2
  },
@@ -130,9 +182,23 @@
   "image20": "https://dodopizza-a.akamaihd.net/static/Img/Products/dda3af877d694e8caa8fa80da7ff19e4_584x584.jpeg",
   "image21": "https://dodopizza-a.akamaihd.net/static/Img/Products/759bc8e81d8c4c1393699e673a0cd97c_584x584.jpeg",
   "title": "Карбонара",
-  "additives": ["моцарелла, соус альфредо"],
-  "removable" : ["Бекон", " сыры чеддер и пармезан", " томаты", " красный лук", " чеснок", " итальянские травы"],
-  "compound": [285.9, 9.4, 14.1, 28.3],
+  "additives": [
+   "моцарелла, соус альфредо"
+  ],
+  "removable": [
+   "Бекон",
+   " сыры чеддер и пармезан",
+   " томаты",
+   " красный лук",
+   " чеснок",
+   " итальянские травы"
+  ],
+  "compound": [
+   285.9,
+   9.4,
+   14.1,
+   28.3
+  ],
   "weight": [
    420,
    630,
@@ -147,7 +213,11 @@
    30,
    35
   ],
-  "price": [489, 739, 889],
+  "price": [
+   489,
+   739,
+   889
+  ],
   "category": 3,
   "rating": 8
  },
@@ -161,9 +231,27 @@
   "image20": "https://dodopizza-a.akamaihd.net/static/Img/Products/d72b371977784933b969489c4a1e6d1e_584x584.jpeg",
   "image21": "https://dodopizza-a.akamaihd.net/static/Img/Products/f3e0a24af9d1444c9f367d3c585b156f_584x584.jpeg",
   "title": "Пицца Микс",
-  "additives": ["моцарелла, соус песто, соус альфредо"],
-  "removable" : ["Бекон", " цыпленок", " ветчина", " сыр блю чиз", " сыры чеддер и пармезан", " кубики брынзы", " сыры томаты", " красный лук", " чеснок", " итальянские травы"],
-  "compound": [264, 10.5, 12.3, 25.9],
+  "additives": [
+   "моцарелла, соус песто, соус альфредо"
+  ],
+  "removable": [
+   "Бекон",
+   " цыпленок",
+   " ветчина",
+   " сыр блю чиз",
+   " сыры чеддер и пармезан",
+   " кубики брынзы",
+   " сыры томаты",
+   " красный лук",
+   " чеснок",
+   " итальянские травы"
+  ],
+  "compound": [
+   264,
+   10.5,
+   12.3,
+   25.9
+  ],
   "weight": [
    440,
    690,
@@ -177,7 +265,11 @@
    30,
    35
   ],
-  "price": [539, 839, 999],
+  "price": [
+   539,
+   839,
+   999
+  ],
   "category": 2,
   "rating": 2
  },
@@ -191,9 +283,19 @@
   "image20": "https://dodopizza-a.akamaihd.net/static/Img/Products/b870b3c85dc94eeca84d19c8f620a492_584x584.jpeg",
   "image21": "https://dodopizza-a.akamaihd.net/static/Img/Products/4702054129d34bbc87903cb584ddedf4_584x584.jpeg",
   "title": "Пепперони фреш",
-  "additives": ["увеличенная порция моцареллы, томатный соус"],
-  "removable" : ["Пикантная пепперони", " томаты"],
-  "compound": [246, 10, 9.4, 28.7],
+  "additives": [
+   "увеличенная порция моцареллы, томатный соус"
+  ],
+  "removable": [
+   "Пикантная пепперони",
+   " томаты"
+  ],
+  "compound": [
+   246,
+   10,
+   9.4,
+   28.7
+  ],
   "weight": [
    410,
    620,
@@ -208,7 +310,11 @@
    30,
    35
   ],
-  "price": [299, 519, 639],
+  "price": [
+   299,
+   519,
+   639
+  ],
   "category": 1,
   "rating": 9
  },
@@ -222,11 +328,20 @@
   "image20": "https://dodopizza-a.akamaihd.net/static/Img/Products/e6be5dd31e5d482cb2701fd5c0bc8b8e_584x584.jpeg",
   "image21": "https://dodopizza-a.akamaihd.net/static/Img/Products/805dc2125f754eba83dc4da7df375126_584x584.jpeg",
   "title": "Четыре сыра 🌱",
-  "additives": ["моцарелла, томатный соус"],
-  "removable" : ["Пастрами из индейки",
-  " овощи-гриль",
-  " кубики брынзы"],
-  "compound": [297, 12.3, 13.1, 30.5],
+  "additives": [
+   "моцарелла, томатный соус"
+  ],
+  "removable": [
+   "Пастрами из индейки",
+   " овощи-гриль",
+   " кубики брынзы"
+  ],
+  "compound": [
+   297,
+   12.3,
+   13.1,
+   30.5
+  ],
   "weight": [
    380,
    570,
@@ -241,7 +356,11 @@
    30,
    35
   ],
-  "price": [489, 739, 889],
+  "price": [
+   489,
+   739,
+   889
+  ],
   "category": 4,
   "rating": 10
  },
@@ -255,11 +374,20 @@
   "image20": "https://dodopizza-a.akamaihd.net/static/Img/Products/346e6e788a7547fe9789430edeca4a8c_584x584.jpeg",
   "image21": "https://dodopizza-a.akamaihd.net/static/Img/Products/51ecd60f091d4b14b470610b5a69a507_584x584.jpeg",
   "title": "Четыре сезона",
-  "additives": ["моцарелла, томатный соус"],
-  "removable" : ["Пастрами из индейки",
-  " овощи-гриль",
-  " кубики брынзы"],
-  "compound": [229, 10, 8.3, 27.2],
+  "additives": [
+   "моцарелла, томатный соус"
+  ],
+  "removable": [
+   "Пастрами из индейки",
+   " овощи-гриль",
+   " кубики брынзы"
+  ],
+  "compound": [
+   229,
+   10,
+   8.3,
+   27.2
+  ],
   "weight": [
    440,
    660,
@@ -274,7 +402,11 @@
    30,
    35
   ],
-  "price": [439, 669, 829],
+  "price": [
+   439,
+   669,
+   829
+  ],
   "category": 5,
   "rating": 10
  },
@@ -288,9 +420,20 @@
   "image20": "https://dodopizza-a.akamaihd.net/static/Img/Products/6b31991dee364597992cc6ff82bf716b_584x584.jpeg",
   "image21": "https://dodopizza-a.akamaihd.net/static/Img/Products/8bbe4b21f70148768f6568e6be6df9be_584x584.jpeg",
   "title": "Пепперони",
-  "additives": ["моцарелла, томатный соус"],
-  "removable" : ["Пастрами из индейки"," овощи-гриль"," кубики брынзы"],
-  "compound": [270, 10.9, 10.8, 30.4],
+  "additives": [
+   "моцарелла, томатный соус"
+  ],
+  "removable": [
+   "Пастрами из индейки",
+   " овощи-гриль",
+   " кубики брынзы"
+  ],
+  "compound": [
+   270,
+   10.9,
+   10.8,
+   30.4
+  ],
   "weight": [
    390,
    580,
@@ -305,7 +448,11 @@
    30,
    35
   ],
-  "price": [439, 669, 829],
+  "price": [
+   439,
+   669,
+   829
+  ],
   "category": 5,
   "rating": 7
  }

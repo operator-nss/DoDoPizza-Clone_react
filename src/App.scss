@@ -135,6 +135,7 @@ h6 {
   -o-object-fit: contain;
   object-fit: contain;
 }
+
 .icon-menu {
   display: none;
 }
@@ -162,14 +163,18 @@ h6 {
   transition-delay: 0s;
 }
 
-.menu-open .icon-menu span:nth-child(1) {
-  -webkit-transform: translateY(0) rotate(45deg);
-  -ms-transform: translateY(0) rotate(45deg);
-  transform: translateY(0) rotate(45deg);
-  width: 2.5rem;
-  -webkit-transition-delay: 0.125s;
-  -o-transition-delay: 0.125s;
-  transition-delay: 0.125s;
+.icon-menu {
+  &.menuOpen {
+    span:nth-child(1) {
+      -webkit-transform: translateY(0) rotate(45deg);
+      -ms-transform: translateY(0) rotate(45deg);
+      transform: translateY(0) rotate(45deg);
+      width: 2.5rem;
+      -webkit-transition-delay: 0.125s;
+      -o-transition-delay: 0.125s;
+      transition-delay: 0.125s;
+    }
+  }
 }
 
 .icon-menu span:nth-child(3) {
@@ -183,7 +188,17 @@ h6 {
   transition-delay: 0s;
 }
 
-.menu-open .icon-menu span:nth-child(3) {
+.icon-menu {
+  &.menuOpen {
+    span:nth-child(3) {
+      transform: translateY(0) rotate(315deg);
+      width: 40px;
+      transition-delay: 0.25s;
+    }
+  }
+}
+
+.icon-menu .menuOpen span:nth-child(3) {
   -webkit-transform: translateY(0) rotate(315deg);
   -ms-transform: translateY(0) rotate(315deg);
   transform: translateY(0) rotate(315deg);
@@ -193,28 +208,30 @@ h6 {
   transition-delay: 0.25s;
 }
 
-.menu-open .icon-menu span:nth-child(2) {
-  -webkit-transform: translateX(60px);
-  -ms-transform: translateX(60px);
-  transform: translateX(60px);
-  -webkit-transition-delay: 0;
-  -o-transition-delay: 0;
-  transition-delay: 0;
+.icon-menu {
+  &.menuOpen {
+    span:nth-child(2) {
+      -webkit-transform: translateX(60px);
+      -ms-transform: translateX(60px);
+      transform: translateX(60px);
+      -webkit-transition-delay: 0;
+      -o-transition-delay: 0;
+      transition-delay: 0;
+    }
+  }
 }
 
 .header__clone {
   background-color: #FF6900;
   height: 50px;
   width: 100%;
-  color:#fff;
+  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.header__body {
-  display: none;
-}
+
 .header__top {
   min-height: 100px;
   display: -webkit-box;
@@ -243,11 +260,12 @@ h6 {
   margin: 0px 40px 0px 0px;
   display: flex;
   align-items: center;
+
   img {
     width: 80px;
     height: 80px;
     margin-left: 20px;
-    @media (max-width: 479.98px){
+    @media (max-width: 479.98px) {
       margin-left: 0px;
     }
   }
@@ -277,6 +295,7 @@ h6 {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+
   &.active {
     position: fixed;
     z-index: 10;
@@ -284,10 +303,12 @@ h6 {
     width: 100vw;
     background-color: #fff;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
     .header__container-bottom {
       min-height: 58px;
       align-items: center;
     }
+
     .menu__header {
       transform: translate(0px, 0px);
     }
@@ -304,7 +325,7 @@ h6 {
 .header__dodo {
   width: 36px;
   height: 36px;
-//transform: scaleX(-1);
+  //transform: scaleX(-1);
   img {
     width: 100%;
     height: 100%;
@@ -317,7 +338,7 @@ h6 {
   justify-content: space-between;
   width: 100%;
   overflow: hidden;
-  @media (max-width: 991.98px){
+  @media (max-width: 991.98px) {
     justify-content: end;
   }
 }
@@ -327,17 +348,21 @@ h6 {
   white-space: nowrap;
   display: flex;
   align-items: center;
-  padding: 15px 25px!important;
+  padding: 15px 25px !important;
+
   &-number {
     opacity: 1;
     visibility: visible;
+
     &.active {
       opacity: 0;
       visibility: hidden;
     }
   }
+
   &-title {
     position: relative;
+
     &:after {
       content: '';
       background-color: #fff;
@@ -357,12 +382,14 @@ h6 {
     transition: all 0.3s ease 0s;
     opacity: 0;
     visibility: hidden;
+
     &.active {
       transform: translate(20px, 4px);
       opacity: 1;
       visibility: visible;
     }
-    img  {
+
+    img {
       width: 100%;
       height: 100%;
     }
@@ -619,7 +646,7 @@ h6 {
     -ms-transform: translate(-100%, 0px);
     transform: translate(-100%, 0px);
     overflow: auto;
-    background-color: #ccc;
+    background-color: #fff;
     -webkit-transition: all 0.3s ease 0s;
     -o-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
@@ -636,10 +663,13 @@ h6 {
     color: #161616;
   }
 
-  .menu-open .header__body {
-    -webkit-transform: translate(0%, 0px);
-    -ms-transform: translate(0%, 0px);
-    transform: translate(0%, 0px);
+
+  .header__body {
+    &.menuOpen {
+      -webkit-transform: translate(0%, 0px);
+      -ms-transform: translate(0%, 0px);
+      transform: translate(0%, 0px);
+    }
   }
 
   .header__delivery {

@@ -1,29 +1,45 @@
-import React, {useEffect} from 'react';
-
+import React from 'react';
 import Header from "./components/Header/Header";
 import './App.scss';
 import Footer from "./components/Footer/Footer";
 import Information from "./components/Information/Information";
 import PizzaList from "./components/PizzaList/PizzaList";
 import CartContainer from "./components/Cart/CartContainer";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import Preloader from "./components/Preloader/Preloader";
+
+const Orders = React.lazy(() => import(/* webpackChunkName: "Orders" */'./pages/Orders/Orders'))
 
 
 function App() {
 
 
     return (
-        <div className="wrapper">
-            <Header/>
+        <BrowserRouter>
 
-            <main className="page">
+                <div className="wrapper">
+                    <Header/>
 
-                <Information/>
-                <CartContainer/>
-                <PizzaList/>
-            </main>
+                    <main className="page">
 
-            <Footer/>
-        </div>
+                        <Information/>
+                        <CartContainer/>
+                        <Routes>
+                        <Route path="/" element={<PizzaList/>}/>
+
+
+                        <Route path="/orders" element={
+                            <React.Suspense fallback={<div><Preloader/></div>}>
+                                <Orders/>
+                            </React.Suspense>
+                        }/>
+                        </Routes>
+                    </main>
+
+                    <Footer/>
+                </div>
+
+        </BrowserRouter>
     );
 }
 

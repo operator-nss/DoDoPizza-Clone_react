@@ -24,6 +24,11 @@
   @media (max-width: 500px) {
     width: 100vw;
   }
+  &.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .cart.open {

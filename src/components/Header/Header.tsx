@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import star from '../../assets/img/star.svg'
 import logo from '../../assets/img/bird.png'
 import {RootState, useAppDispatch} from "../../redux/store";
@@ -8,12 +8,14 @@ import {useInView} from "react-intersection-observer";
 import arrowCart from '../../assets/img/arrow.svg'
 import {useSelector} from "react-redux";
 import {CalcTotalItems} from "../../utils/calcTotalPrice";
+import {Link} from "react-router-dom";
 
 
 const Header: React.FC = () => {
     const dispatch = useAppDispatch();
     const [hoverCart, setHoverCart] = useState(false);
     const {cartItems} = useSelector((state: RootState) => state.cart);
+    const [openBurger, setOpenBurger] = useState(false);
 
 
     const {ref, inView} = useInView({
@@ -24,21 +26,34 @@ const Header: React.FC = () => {
         dispatch(setCartOpened(true));
     }
 
+    const toggleBurger = () => {
+        setOpenBurger(!openBurger)
+    }
+
+    useEffect(() => {
+        if (openBurger) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = '';
+        }
+    }, [openBurger])
+
 
 
 
     return (
 
         <header className="header">
-            <div className="header__clone">ВНИМАНИЕ! ЭТОТ САЙТ СОЗДАН В УЧЕБНЫХ ЦЕЛЯХ. ФУНКЦИОНАЛ ОПЛАТЫ НЕ РАБОТАЕТ</div>
+            <div className="header__clone">ВНИМАНИЕ! ЭТОТ САЙТ СОЗДАН В УЧЕБНЫХ ЦЕЛЯХ. ФУНКЦИОНАЛ ОПЛАТЫ НЕ РАБОТАЕТ
+            </div>
             <div className="header__container">
 
                 <div ref={ref} className="header__top">
                     <div className="header__left">
-                        <div className="header__logo">
+                        <Link to='/' className="header__logo">
                             React Pizza
                             <img src={logo} alt=""/>
-                        </div>
+                        </Link>
                         <div className="header__delivery delivery-header">
                             <div className="delivery-header__label">
                                 <div className="delivery-header__delivery">Доставка пиццы</div>
@@ -68,8 +83,8 @@ const Header: React.FC = () => {
                             <div className="dodocoins-header__title">Бонусы</div>
                         </div>
 
-                        <button className="header__user button">Войти</button>
-                        <button className="icon-menu">
+                        <Link to='/orders' className="header__user button">Мои заказы</Link>
+                        <button onClick={toggleBurger} className={clsx("icon-menu", {menuOpen: openBurger})}>
                             <span></span>
                             <span></span>
                             <span></span>
@@ -98,28 +113,30 @@ const Header: React.FC = () => {
                     </div>
 
 
-                <div className="header__body">
-                    <ul className="menu__list">
-                        <li className="menu__item"><a href="" className="menu__link">Пицца</a></li>
-                        <li className="menu__item"><a href="" className="menu__link">Комбо</a></li>
-                        <li className="menu__item"><a href="" className="menu__link">Закуски</a></li>
-                        <li className="menu__item"><a href="" className="menu__link">Десерты</a></li>
-                        <li className="menu__item"><a href="" className="menu__link">Напитки</a></li>
-                        <li className="menu__item"><a href="" className="menu__link">Другие товары</a></li>
-                        <li className="menu__item"><a href="" className="menu__link">Акции</a></li>
-                        <li className="menu__item"><a href="" className="menu__link">Контакты</a></li>
-                        <li className="menu__item"><a href="" className="menu__link">О нас</a></li>
-                        <li className="menu__item"><a href="" className="menu__link">Работа у нас</a></li>
-                    </ul>
-                </div>
-                <button onClick={openCart}
-                        onMouseOver={() => setHoverCart(true)}
-                        onMouseLeave={() => setHoverCart(false)}
-                        className="header__cart button button__orange"><span className='header__cart-title'>Корзина&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <img className={clsx('header__cart-image', {active:hoverCart})}
-                                      src={arrowCart} alt=""/>
-                    <span className={clsx('header__cart-number', {active:hoverCart})}>  {CalcTotalItems(cartItems)}</span>
-                </button>
+                    <div hidden className={clsx("header__body", {menuOpen: openBurger})}>
+                        <ul className="menu__list">
+                            <li className="menu__item"><a href="" className="menu__link">Пицца</a></li>
+                            <li className="menu__item"><a href="" className="menu__link">Комбо</a></li>
+                            <li className="menu__item"><a href="" className="menu__link">Закуски</a></li>
+                            <li className="menu__item"><a href="" className="menu__link">Десерты</a></li>
+                            <li className="menu__item"><a href="" className="menu__link">Напитки</a></li>
+                            <li className="menu__item"><a href="" className="menu__link">Другие товары</a></li>
+                            <li className="menu__item"><a href="" className="menu__link">Акции</a></li>
+                            <li className="menu__item"><a href="" className="menu__link">Контакты</a></li>
+                            <li className="menu__item"><a href="" className="menu__link">О нас</a></li>
+                            <li className="menu__item"><a href="" className="menu__link">Работа у нас</a></li>
+                        </ul>
+                    </div>
+                    <button onClick={openCart}
+                            onMouseOver={() => setHoverCart(true)}
+                            onMouseLeave={() => setHoverCart(false)}
+                            className="header__cart button button__orange"><span
+                        className='header__cart-title'>Корзина&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <img className={clsx('header__cart-image', {active: hoverCart})}
+                             src={arrowCart} alt=""/>
+                        <span
+                            className={clsx('header__cart-number', {active: hoverCart})}>  {CalcTotalItems(cartItems)}</span>
+                    </button>
                 </div>
                 <div></div>
             </div>

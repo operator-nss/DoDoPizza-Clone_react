@@ -57,6 +57,9 @@ export const cartSlice = createSlice({
                 });
             }
         },
+        resetCartItems: (state) => {
+            state.cartItems = [];
+        },
         setCartOpened: (state, action: PayloadAction<boolean>) => {
             state.cartOpened = action.payload
         },
@@ -182,6 +185,7 @@ export const cartSlice = createSlice({
 export const {setCartItems,
     setCartOpened,
     setStatusCart,
+    resetCartItems,
     setAddSouce,
     setAddToOrder,
     deletePizza,

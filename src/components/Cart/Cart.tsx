@@ -1,14 +1,16 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import closeButtonB from "../../assets/img/close-b.svg";
 import info from "../../assets/img/info.svg";
 import dotcoins from "../../assets/img/dotcoins.svg";
 import {useSelector} from "react-redux";
 import {RootState, useAppDispatch} from "../../redux/store";
 import {CalcTotalPrice} from "../../utils/calcTotalPrice";
-import {addPizza, deletePizza, minusPizza} from "../../redux/Slices/cartSlice";
+import {addPizza, deletePizza, minusPizza, resetCartItems, setStatusCart} from "../../redux/Slices/cartSlice";
 import clsx from "clsx";
 import AddOrderItem from "../AddOrderItem/AddOrderItem";
 import AddSouce from "../AddSouce/AddSouce";
+import axios from "axios";
+import {setOrderId} from "../../redux/Slices/orderSlice";
 
 
 type CartProps = {
@@ -20,14 +22,16 @@ type CartProps = {
 }
 
 
-const Cart: React.FC<CartProps> = ({setOpenPopupInfo,
+const Cart: React.FC<CartProps> = ({
+                                       setOpenPopupInfo,
                                        openPopupInfo,
                                        openPopupSouces,
                                        setOpenPopupSouces
-}) => {
-    const {cartItems, addToOrder, addSouce} = useSelector((state: RootState) => state.cart);
+                                   }) => {
+    const {cartItems, statusCart, addToOrder, addSouce} = useSelector((state: RootState) => state.cart);
     const dispatch = useAppDispatch();
-
+    const [isOrderComplete, setIsOrderComplete] = useState(false);
+    // TODO  сделать чтобы отображалось что заказ принят
 
     const writeItem = () => {
         if (cartItems.length === 1) {
@@ -40,22 +44,21 @@ const Cart: React.FC<CartProps> = ({setOpenPopupInfo,
     const calcSouces = () => {
         const countSouces = addSouce?.filter(item => item.count > 0);
         const totalPrice = countSouces?.reduce((num: number, item: any) => num + item.price, 0)
-       return {
-           countSouce: countSouces?.length,
-           totalPriceSouces: +totalPrice || 0
+        return {
+            countSouce: countSouces?.length,
+            totalPriceSouces: +totalPrice || 0
+        }
     }
 
-     }
 
-
-     const renderAddableItems = useCallback(() => {
-        return  addToOrder.filter(item => !item.selected).map(item => {
-             return (
-                 <AddOrderItem setOpenPopupSouces={setOpenPopupSouces} key={item.id}
-                               {...item}/>
-             )
-         })
-      }, [addToOrder, setOpenPopupSouces])
+    const renderAddableItems = useCallback(() => {
+        return addToOrder.filter(item => !item.selected).map(item => {
+            return (
+                <AddOrderItem setOpenPopupSouces={setOpenPopupSouces} key={item.id}
+                              {...item}/>
+            )
+        })
+    }, [addToOrder, setOpenPopupSouces])
 
     useEffect(() => {
         calcSouces();
@@ -78,12 +81,29 @@ const Cart: React.FC<CartProps> = ({setOpenPopupInfo,
         setOpenPopupSouces(false)
     }
 
+    const onClickOrder = async () => {
+        try {
+            dispatch(setStatusCart('cart loading'));
+            const {data} = await axios.post('https://62a7219797b6156bff884996.mockapi.io/orders', {
+                items: cartItems,
+            });
+            dispatch(setOrderId(data.id));
+            setIsOrderComplete(true);
+            dispatch(resetCartItems());
+
+        } catch (error) {
+            alert('Ошибка при создании заказа :(');
+        }
+        dispatch(setStatusCart('cart success'));
+    };
+
 
     return (
         <>
             <div className="order__label">
                 {cartItems.reduce((num, item) => num + item.count, 0)} {writeItem()} на&nbsp;
-                { CalcTotalPrice(cartItems)} ₽</div>
+                {CalcTotalPrice(cartItems)} ₽
+            </div>
 
             <div className="order__items">
 
@@ -210,7 +230,8 @@ const Cart: React.FC<CartProps> = ({setOpenPopupInfo,
                     <div className="sum-end-order__price">{CalcTotalPrice(cartItems)} ₽</div>
                 </div>
 
-                <button className="end-order__button button button__orange">К оформлению заказа
+                <button onClick={onClickOrder} disabled={statusCart === 'cart loading'}
+                        className="end-order__button button button__orange">К оформлению заказа
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="button__arrow">
                         <path d="M10 18l6-6-6-6" stroke="#000" strokeWidth="2" strokeLinecap="round"
                               strokeLinejoin="round"></path>
