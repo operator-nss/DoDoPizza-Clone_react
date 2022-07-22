@@ -10,6 +10,7 @@ import Cart from "./Cart";
 import CartEmpty from "./CartEmpty";
 import {isMobile} from "react-device-detect";
 import Preloader from "../Preloader/Preloader";
+import {useDebouncedCallback} from "use-debounce";
 
 
 const CartContainer: React.FC = () => {
@@ -17,12 +18,17 @@ const CartContainer: React.FC = () => {
     const {cartOpened, cartItems, statusCart} = useSelector((state: RootState) => state.cart);
     const [openPopupInfo, setOpenPopupInfo] = useState(false);
     const [openPopupSouces, setOpenPopupSouces] = useState(false);
+    const [isOrderComplete, setIsOrderComplete] = useState(false);
 
+    const debounced = useDebouncedCallback(() => {
+        setIsOrderComplete(false);
+    },1000);
 
     const closeCart = () => {
         dispatch(setCartOpened(false));
         setOpenPopupInfo(false);
-        setOpenPopupSouces(false)
+        setOpenPopupSouces(false);
+        debounced()
     }
 
     useEffect(() => {
@@ -52,13 +58,14 @@ const CartContainer: React.FC = () => {
                 </button>
 
                 {statusCart === 'cart loading' ? <Preloader /> :
-                <div className="cart__body">
+                <div className={clsx("cart__body", {ordered: isOrderComplete})}>
 
                     {cartItems.length > 0 ? <Cart openPopupSouces={openPopupSouces}
+                                                  setIsOrderComplete={setIsOrderComplete}
                                                   setOpenPopupSouces={setOpenPopupSouces}
                                                   setOpenPopupInfo={setOpenPopupInfo}
                                                   openPopupInfo={openPopupInfo}/> :
-                        <CartEmpty closeCart={closeCart}/>}
+                        <CartEmpty isOrderComplete={isOrderComplete} closeCart={closeCart}/>}
 
                 </div>
                 }

@@ -30,4 +30,9 @@
     min-height: 400px;
     gap: 40px;
   }
+  &__button {
+    &:disabled {
+      background-color: #5e5959;
+    }
+  }
 }

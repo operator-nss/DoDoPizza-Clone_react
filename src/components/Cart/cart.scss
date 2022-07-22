@@ -6,7 +6,8 @@
   bottom: 0px;
   right: 0px;
   width: 430px;
-  background: rgb(243, 243, 247);
+  //background: rgb(243, 243, 247);
+  background:#fff;
   -webkit-transition-property: -webkit-transform;
   transition-property: -webkit-transform;
   -o-transition-property: transform;
@@ -21,6 +22,38 @@
   -webkit-transform: translateX(530px);
   -ms-transform: translateX(530px);
   transform: translateX(530px);
+
+  &__body {
+    &.ordered {
+      min-height: 100vh;
+      margin:auto 0;
+      //flex: 1 1 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  &__order {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+    &-message {
+      font-size: 20px;
+      font-weight: 500;
+      span {
+        font-weight: 900;
+      }
+    }
+    &-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+  }
   @media (max-width: 500px) {
     width: 100vw;
   }

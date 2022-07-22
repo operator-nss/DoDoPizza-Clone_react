@@ -18,7 +18,8 @@ type CartProps = {
     setOpenPopupInfo: any,
     openPopupInfo: boolean
     openPopupSouces: boolean,
-    setOpenPopupSouces: any
+    setOpenPopupSouces: any,
+    setIsOrderComplete: any
 }
 
 
@@ -26,12 +27,12 @@ const Cart: React.FC<CartProps> = ({
                                        setOpenPopupInfo,
                                        openPopupInfo,
                                        openPopupSouces,
-                                       setOpenPopupSouces
+                                       setOpenPopupSouces,
+                                       setIsOrderComplete
                                    }) => {
     const {cartItems, statusCart, addToOrder, addSouce} = useSelector((state: RootState) => state.cart);
     const dispatch = useAppDispatch();
-    const [isOrderComplete, setIsOrderComplete] = useState(false);
-    // TODO  сделать чтобы отображалось что заказ принят
+
 
     const writeItem = () => {
         if (cartItems.length === 1) {
