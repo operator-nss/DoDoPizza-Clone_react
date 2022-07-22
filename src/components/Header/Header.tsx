@@ -17,19 +17,22 @@ const Header: React.FC = () => {
     const {cartItems} = useSelector((state: RootState) => state.cart);
     const [openBurger, setOpenBurger] = useState(false);
 
-
+    //Аналог Intersection Observer
     const {ref, inView} = useInView({
         threshold: 0
     });
 
+    //Открыть корзину
     const openCart = () => {
         dispatch(setCartOpened(true));
     }
 
+    //Открыть/закрыть бургер меню
     const toggleBurger = () => {
         setOpenBurger(!openBurger)
     }
 
+    //При открытии бургера нельзя скроллить сайт
     useEffect(() => {
         if (openBurger) {
             document.body.style.overflow = "hidden";
@@ -76,8 +79,8 @@ const Header: React.FC = () => {
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                      fill="none">
                                     <path fillRule="evenodd" clipRule="evenodd"
-                                          d="M11 1a1 1 0 011 1v2a8 8 0 110 16v2a1 1 0 11-2 0v-2H6.6c-.56 0-.84 0-1.054-.109a1 1 0 01-.437-.437C5 19.24 5 18.96 5 18.4V5.6c0-.56 0-.84.109-1.054a1 1 0 01.437-.437C5.76 4 6.04 4 6.6 4H10V2a1 1 0 011-1zm1 17a6 6 0 000-12H7v12h5z"
-                                          fill="#000"></path>
+    d="M11 1a1 1 0 011 1v2a8 8 0 110 16v2a1 1 0 11-2 0v-2H6.6c-.56 0-.84 0-1.054-.109a1 1 0 01-.437-.437C5 19.24 5 18.96 5 18.4V5.6c0-.56 0-.84.109-1.054a1 1 0 01.437-.437C5.76 4 6.04 4 6.6 4H10V2a1 1 0 011-1zm1 17a6 6 0 000-12H7v12h5z"
+    fill="#000"/>
                                 </svg>
                             </div>
                             <div className="dodocoins-header__title">Бонусы</div>
@@ -85,9 +88,9 @@ const Header: React.FC = () => {
 
                         <Link to='/orders' className="header__user button">Мои заказы</Link>
                         <button onClick={toggleBurger} className={clsx("icon-menu", {menuOpen: openBurger})}>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                            <span/>
+                            <span/>
+                            <span/>
                         </button>
                     </div>
                 </div>
@@ -138,7 +141,6 @@ const Header: React.FC = () => {
                             className={clsx('header__cart-number', {active: hoverCart})}>  {CalcTotalItems(cartItems)}</span>
                     </button>
                 </div>
-                <div></div>
             </div>
 
         </header>

@@ -3,7 +3,6 @@ import secret from '../../assets/img/footer/secret.svg'
 import app from '../../assets/img/footer/app.svg'
 import appgallery from '../../assets/img/footer/appgalery.svg'
 import google from '../../assets/img/footer/google.svg'
-import dodofooter from '../../assets/img/footer/dodo-footer.svg';
 import youtube from '../../assets/img/footer/you.svg';
 import classniki from '../../assets/img/footer/class.svg';
 import vk from '../../assets/img/footer/vk.svg';
@@ -22,7 +21,7 @@ const Footer = () => {
                     </div>
                     <div className="secret-footer__text">Стань тайным покупателем Нашей Пиццы и получи пиццу в подарок
                     </div>
-                    <a href="#" className="secret-footer__button button">Заполнить анкету</a>
+                    <a href="" className="secret-footer__button button">Заполнить анкету</a>
                 </div>
 
             </div>

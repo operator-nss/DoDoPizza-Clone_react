@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import './pizzapopup.scss'
 import closeButton from '../../assets/img/close.svg'
 import circleMed from '../../assets/img/circlemed.svg'
@@ -67,7 +67,6 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
         const [activeType, setActiveType] = useState(0);
         const [openPopupInfo, setOpenPopupInfo] = useState(false);
         const [openPopupSend, setOpenPopupSend] = useState(false);
-        const [calcPopup, setCalcPopup] = useState(0);
         const [addableItems, setAddableItems] = useState([
             {selected: false, id: 0, title: 'Чеддер и пармезан', price: '59', image: add01},
             {selected: false, id: 1, title: 'Сырный бортик', price: '179', image: add02},
@@ -91,23 +90,24 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
         const [addedAdditivities, setAddedAdditivities] = useState<string[]>([]);
         const [activeImage, setActiveImage] = useState('');
 
-
-        const debounced = useDebouncedCallback(() => {
-            setOpenPopupSend(false);
-        }, 4000);
-
         const sizes = ['Маленькая', 'Средняя', 'Большая'];
         const types = ['Традиционное', 'Тонкое'];
         const radius = [25, 30, 35];
 
         const dispatch = useAppDispatch();
 
+        //Добавление таймаута
+        const debounced = useDebouncedCallback(() => {
+            setOpenPopupSend(false);
+        }, 4000);
 
+        // закрыть попап
         const onClickClosePopup = () => {
             setOpenPopup(false);
+            setOpenPopupInfo(false)
         }
 
-
+        // Установка кнопки размера пиццы исходя из state
         const setActiveSizeButton = (i: number) => {
             setActiveSize(i);
             if (i === 0) {
@@ -115,15 +115,18 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
             }
         }
 
+        // Установка кнопки типа пиццы исходя из state
         const setActiveTypeButton = (i: number) => {
             setActiveType(i)
         }
 
+        // Открытие Инфо-папапа
         const openInfoPopup = () => {
             setOpenPopupInfo(!openPopupInfo)
         }
 
-        const renderPizza = () => {
+        // рендер картинки при выборе заного размера и типа пиццы
+        const renderPizza = useCallback(() => {
             if (activeSize === 0 && activeType === 0) {
                 setActiveImage(image00)
             } else if (activeSize === 1 && activeType === 0) {
@@ -135,18 +138,21 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
             } else if (activeSize === 2 && activeType === 0) {
                 setActiveImage(image20)
             }
-        }
+        }, [activeSize, activeType, image00, image11, image20, image21, imageUrl])
 
+        // рендер картинки при каждом изменении state
         useEffect(() => {
             renderPizza()
         }, [renderPizza])
 
+        // Если открывается корзина - то закрываем попап
         useEffect(() => {
             if (cartOpened) {
                 setOpenPopup(false)
             }
-        }, [cartOpened])
+        }, [cartOpened, setOpenPopup])
 
+        // Рассчет суммы за пиццу исходя из ее типа
         const reducePrice = () => {
             if (activeType === 0) {
                 return price[activeSize] + addableItems.filter(item => item.selected)?.reduce((num, item) => num + +item.price, 0);
@@ -155,6 +161,7 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
             }
         }
 
+        // Добавление пиццы в корзину и после добавления закрытие всех открытыхх попапов
         const addPizzaToCart = async () => {
             const titles = addableItems.filter(item => item.selected)
             const arr: string[] = [];
@@ -176,11 +183,12 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
             debounced();
             dispatch(setCartItems(item));
             setOpenPopup(false);
+            setOpenPopupInfo(false)
             // setActiveSize(1);
             // setActiveType(0);
-
         }
 
+        // Ингридиенты которые еще не добавлены
         const addAdditivities = (title: string) => {
             if (addedAdditivities.some(item => item === title)) {
                 setAddedAdditivities(addedAdditivities.filter(item => item !== title))
@@ -194,7 +202,7 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
             <>
                 <div onClick={onClickClosePopup}
                      style={openPopup ? {'visibility': 'visible'} : {'visibility': 'hidden'}}
-                     className={clsx({open: openPopup}, "pizza__overlay")}></div>
+                     className={clsx({open: openPopup}, "pizza__overlay")}/>
 
 
                 <div className={clsx('popup-pizza__send', {active: openPopupSend})}>
@@ -285,7 +293,7 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
 
                             <ul className="description-popup__sizes">
                                 <div
-                                    className={clsx({size0: (activeSize === 0)}, {size1: (activeSize === 1)}, {size2: (activeSize === 2)}, 'description-popup__size-active')}></div>
+                                    className={clsx({size0: (activeSize === 0)}, {size1: (activeSize === 1)}, {size2: (activeSize === 2)}, 'description-popup__size-active')}/>
                                 {sizes.map((item, i: number) => {
                                     return <button key={i} onClick={() => setActiveSizeButton(i)}
                                                    className="description-popup__size"><span>{sizes[i]}</span></button>
@@ -294,7 +302,7 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
 
                             <ul className="description-popup__types">
                                 <div
-                                    className={clsx({type0: (activeType === 0)}, {type1: (activeType === 1)}, 'description-popup__type-active')}></div>
+                                    className={clsx({type0: (activeType === 0)}, {type1: (activeType === 1)}, 'description-popup__type-active')}/>
                                 {types.map((item, i: number) => {
                                     return <button key={i} disabled={activeSize === 0}
                                                    onClick={() => setActiveTypeButton(i)}

@@ -18,6 +18,7 @@ const AddItemToPizza: React.FC<AddItemToPizzaProps> = ({
 
     const [selectedItem, setSelectedItem] = useState(selected);
 
+    //Добавление ингридиента в пиццу
     const addSelected = () => {
         setSelectedItem(!selectedItem)
         setAddableItems([...addableItems], addableItems[id].selected = !addableItems[id].selected)

@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {useSelector} from "react-redux";
-import {RootState, useAppDispatch} from "../../redux/store";
-import {AddableToCart, minusSouce, deletePizza, setSouceItems, deleteSouce} from "../../redux/Slices/cartSlice";
+import {useAppDispatch} from "../../redux/store";
+import {AddableToCart, deleteSouce, minusSouce, setSouceItems} from "../../redux/Slices/cartSlice";
 
 type AddSouceProps = {
     selected: boolean, id: number,realId:number, title: string, price: string, image: string, count:number
@@ -10,7 +9,6 @@ type AddSouceProps = {
 const AddSouce: React.FC<AddSouceProps> = ({selected,realId, id, count, title, price, image}) => {
 
     let [souceCount, setSouceCount] = useState(0);
-    const { addSouce, cartItems} = useSelector((state: RootState) => state.cart);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -18,6 +16,7 @@ const AddSouce: React.FC<AddSouceProps> = ({selected,realId, id, count, title, p
     }, [count])
 
 
+    //Добавление соуса по кнопке +
     const plusSouce = () => {
         const params = null;
         const item: AddableToCart = {
@@ -37,8 +36,8 @@ const AddSouce: React.FC<AddSouceProps> = ({selected,realId, id, count, title, p
         dispatch(setSouceItems(item))
     }
 
+    //Удаление соуса по кнопке -
     const minusSouceButton = () => {
-
         setSouceCount(souceCount => souceCount - 1);
         souceCount > 1 ? dispatch(minusSouce(id)) : dispatch(deleteSouce(id))
      }

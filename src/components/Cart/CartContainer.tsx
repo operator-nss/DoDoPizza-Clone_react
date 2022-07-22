@@ -20,10 +20,12 @@ const CartContainer: React.FC = () => {
     const [openPopupSouces, setOpenPopupSouces] = useState(false);
     const [isOrderComplete, setIsOrderComplete] = useState(false);
 
+    //Добавление пиццы по кнопке +
     const debounced = useDebouncedCallback(() => {
         setIsOrderComplete(false);
     },1000);
 
+    //Закрыть корзину и все попапы
     const closeCart = () => {
         dispatch(setCartOpened(false));
         setOpenPopupInfo(false);
@@ -31,6 +33,8 @@ const CartContainer: React.FC = () => {
         debounced()
     }
 
+
+    //Убирание дерганья при открытии корзины
     useEffect(() => {
         if (cartOpened && !isMobile) {
             document.body.style.overflow = "hidden";
@@ -48,7 +52,7 @@ const CartContainer: React.FC = () => {
     return (
         <>
             <div onClick={closeCart} style={cartOpened ? {'visibility': 'visible'} : {'visibility': 'hidden'}}
-                 className={clsx({open: cartOpened}, "cart__overlay")}></div>
+    className={clsx({open: cartOpened}, "cart__overlay")}/>
 
 
             <div className={clsx({open: cartOpened},{loading: statusCart === 'cart loading'}, "cart")}>

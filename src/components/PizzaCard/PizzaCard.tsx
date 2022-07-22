@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import PizzaPopup from "../PizzaPopup/PizzaPopup";
 import {isMobile} from 'react-device-detect';
+
 type PizzaCardProps = {
     imageUrl: string,
     realId: number,
@@ -33,6 +34,7 @@ const PizzaCard: React.FC<PizzaCardProps> = ({
 
     const [openPopup, setOpenPopup] = useState(false);
 
+    // На декстопе убираем скролл сайта и добавляем паддинг к боди из-за убирания скролла бокового браузера при открытии попапа
     useEffect(() => {
         if (openPopup && !isMobile) {
             document.body.style.overflow = "hidden";
@@ -45,6 +47,7 @@ const PizzaCard: React.FC<PizzaCardProps> = ({
         }
     }, [openPopup])
 
+    // При нажатии на пиццу открываем попап с пиццей
     const openPizzaPopup = () => {
         setOpenPopup(true);
     }

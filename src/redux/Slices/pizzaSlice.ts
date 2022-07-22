@@ -35,9 +35,9 @@ export const phoneSlice = createSlice({
     name: 'pizza',
     initialState,
     reducers: {
-        // setSearchValue: (state, action: PayloadAction<string>) => {
-        //     state.searchValue = action.payload;
-        // },
+        setStatus: (state, action: PayloadAction<string>) => {
+            state.status = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fetchPizza.pending, (state) => {
@@ -56,6 +56,6 @@ export const phoneSlice = createSlice({
 
 })
 
-export const { } = phoneSlice.actions
+export const { setStatus } = phoneSlice.actions
 
 export default phoneSlice.reducer

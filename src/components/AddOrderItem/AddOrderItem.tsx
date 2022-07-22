@@ -28,9 +28,10 @@ const AddOrderItem: React.FC<AddOrderItemProps> = ({
 
     const [selectedClass, setSelectedClass] = useState(false);
     const dispatch = useAppDispatch();
-    const {cartItems, addSouce} = useSelector((state: RootState) => state.cart);
+    const {cartItems} = useSelector((state: RootState) => state.cart);
 
 
+    //Добавление товара в корзину
     const selectItemToOrder = () => {
         if (id === 0) {
             setOpenPopupSouces(true)

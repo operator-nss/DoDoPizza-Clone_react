@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import closeButtonB from "../../assets/img/close-b.svg";
 import info from "../../assets/img/info.svg";
 import dotcoins from "../../assets/img/dotcoins.svg";
@@ -33,7 +33,7 @@ const Cart: React.FC<CartProps> = ({
     const {cartItems, statusCart, addToOrder, addSouce} = useSelector((state: RootState) => state.cart);
     const dispatch = useAppDispatch();
 
-
+//Правило орфографии для разного количества товара
     const writeItem = () => {
         if (cartItems.length === 1) {
             return 'товар'
@@ -42,16 +42,9 @@ const Cart: React.FC<CartProps> = ({
         } else return 'товаров'
     }
 
-    const calcSouces = () => {
-        const countSouces = addSouce?.filter(item => item.count > 0);
-        const totalPrice = countSouces?.reduce((num: number, item: any) => num + item.price, 0)
-        return {
-            countSouce: countSouces?.length,
-            totalPriceSouces: +totalPrice || 0
-        }
-    }
 
 
+        //Рендер товаров которые можно добавить
     const renderAddableItems = useCallback(() => {
         return addToOrder.filter(item => !item.selected).map(item => {
             return (
@@ -62,26 +55,30 @@ const Cart: React.FC<CartProps> = ({
     }, [addToOrder, setOpenPopupSouces])
 
     useEffect(() => {
-        calcSouces();
         renderAddableItems()
-    }, [addSouce, calcSouces, cartItems, renderAddableItems])
+    }, [addSouce, cartItems, renderAddableItems])
 
+    //Добавление пиццы по кнопке +
     const pizzaCountPlus = (id: number | string) => {
         dispatch(addPizza(id))
     }
 
+    //Добавление пиццы по кнопке -
     const pizzaCountMinus = (id: number) => {
         dispatch(minusPizza(id))
     }
 
+    //Удаление товара из корзины
     const deleteItem = (id: number) => {
         dispatch(deletePizza(id))
     }
 
+    //Закрытие попапа соусов
     const closePopupSouce = () => {
         setOpenPopupSouces(false)
     }
 
+    //Сделать заказ
     const onClickOrder = async () => {
         try {
             dispatch(setStatusCart('cart loading'));
@@ -235,7 +232,7 @@ const Cart: React.FC<CartProps> = ({
                         className="end-order__button button button__orange">К оформлению заказа
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="button__arrow">
                         <path d="M10 18l6-6-6-6" stroke="#000" strokeWidth="2" strokeLinecap="round"
-                              strokeLinejoin="round"></path>
+    strokeLinejoin="round"/>
                     </svg>
                 </button>
 

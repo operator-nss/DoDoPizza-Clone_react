@@ -16,22 +16,28 @@ const Orders = () => {
     const dispatch = useAppDispatch();
     const {orders, orderId, statusOrder} = useSelector((state: RootState) => state.order);
 
+    // При первом рендере фетчим с сервера список заказов
     useEffect(() => {
         if (!loadingOrders.current) {
-            dispatch(setStatusOrder('order pending'));
-            dispatch((fetchOrders()));
-            dispatch(setStatusOrder('success'));
+            try {
+                dispatch(setStatusOrder('order pending'));
+                dispatch((fetchOrders()));
+                dispatch(setStatusOrder('success'));
+            }catch (e) {
+                console.log(e)
+                dispatch(setStatusOrder('error'));
+            }
         }
         loadingOrders.current = true
     }, [dispatch, orders]);
 
 
+    // Очистка списка заказов на сервере и в state
     const clearOrders = async () => {
         dispatch(setStatusOrder('order pending'));
         try {
             dispatch(setStatusOrder('order pending'));
             for (let i = 1; i <= orderId; i++) {
-                console.log(i)
                 await axios.delete('https://62a7219797b6156bff884996.mockapi.io/orders/' + i);
                 await delay(1000);
             }

@@ -5,9 +5,8 @@ type OrderCardProps = {
     id:any, realId:any, title:any, price:any, image:any, removeFromPizza:any, size:any, radius:any, type:any, addableItems:any, count:any
 }
 
-const OrderCard:React.FC<OrderCardProps> = ({id,
-
-                                             realId,
+const OrderCard:React.FC<OrderCardProps> = ({   id,
+                                                realId,
                                                 title,
                                                 price,
                                                 image,
