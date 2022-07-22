@@ -32,7 +32,7 @@ import {useDebouncedCallback} from "use-debounce";
 type PizzaPopupProps = {
     openPopup: boolean,
     setOpenPopup: any,
-    imageUrl: string,
+    image10: string,
     title: string,
     price: number[],
     weight: number[],
@@ -52,7 +52,7 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
                                                    price,
                                                    realId,
                                                    setOpenPopup,
-                                                   imageUrl,
+                                                   image10,
                                                    image00,
                                                    image11,
                                                    additives,
@@ -130,7 +130,7 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
             if (activeSize === 0 && activeType === 0) {
                 setActiveImage(image00)
             } else if (activeSize === 1 && activeType === 0) {
-                setActiveImage(imageUrl)
+                setActiveImage(image10)
             } else if (activeSize === 1 && activeType === 1) {
                 setActiveImage(image11)
             } else if (activeSize === 2 && activeType === 1) {
@@ -138,7 +138,7 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
             } else if (activeSize === 2 && activeType === 0) {
                 setActiveImage(image20)
             }
-        }, [activeSize, activeType, image00, image11, image20, image21, imageUrl])
+        }, [activeSize, activeType, image00, image11, image20, image21, image10])
 
         // рендер картинки при каждом изменении state
         useEffect(() => {

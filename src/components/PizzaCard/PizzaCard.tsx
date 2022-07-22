@@ -3,7 +3,6 @@ import PizzaPopup from "../PizzaPopup/PizzaPopup";
 import {isMobile} from 'react-device-detect';
 
 type PizzaCardProps = {
-    imageUrl: string,
     realId: number,
     title: string,
     price: number[],
@@ -11,6 +10,7 @@ type PizzaCardProps = {
     removable: string[],
     weight: number[],
     image00: string,
+    image10: string,
     image20: string,
     image21: string,
     image11: string,
@@ -18,10 +18,10 @@ type PizzaCardProps = {
 }
 
 const PizzaCard: React.FC<PizzaCardProps> = ({
-                                                 imageUrl,
                                                  compound,
                                                  image00,
                                                  image11,
+                                                 image10,
                                                  removable,
                                                  image20,
                                                  image21,
@@ -58,7 +58,7 @@ const PizzaCard: React.FC<PizzaCardProps> = ({
     return (
         <div className="pizza__item item-pizza">
 
-            {<PizzaPopup imageUrl={imageUrl}
+            {<PizzaPopup image10={image10}
                          title={title}
                          image00={image00}
                          image11={image11}
@@ -75,7 +75,7 @@ const PizzaCard: React.FC<PizzaCardProps> = ({
 
 
             <div onClick={openPizzaPopup} className="item-pizza__image">
-                <img src={imageUrl} alt="картинка"/>
+                <img src={image10} alt="картинка"/>
             </div>
             <div className="item-pizza__title">{title}</div>
             <div

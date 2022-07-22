@@ -2,7 +2,6 @@
  {
   "id": 0,
   "realId": 0,
-  "imageUrl": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658475980/DoDo-Pizza-React/01/01-10_mqhjkw.jpg",
   "image00": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658475772/DoDo-Pizza-React/01/01-00_h6vjv5.jpg",
   "image10": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658475980/DoDo-Pizza-React/01/01-10_mqhjkw.jpg",
   "image11": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658475980/DoDo-Pizza-React/01/01-11_pf6jx7.jpg",
@@ -41,14 +40,11 @@
    489,
    739,
    889
-  ],
-  "category": 3,
-  "rating": 4
+  ]
  },
  {
   "id": 1,
   "realId": 1,
-  "imageUrl": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658476461/DoDo-Pizza-React/02/02-10_npm5cz.jpg",
   "image00": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658476461/DoDo-Pizza-React/02/02-00_hkwy7a.jpg",
   "image10": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658476461/DoDo-Pizza-React/02/02-10_npm5cz.jpg",
   "image11": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658476461/DoDo-Pizza-React/02/02-11_b7lsip.jpg",
@@ -84,14 +80,11 @@
    439,
    669,
    829
-  ],
-  "category": 3,
-  "rating": 6
+  ]
  },
  {
   "id": 2,
   "realId": 2,
-  "imageUrl": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658476757/DoDo-Pizza-React/03/03-10_l5ijtc.jpg",
   "image00": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658476757/DoDo-Pizza-React/03/03-00_ml9e09.jpg",
   "image10": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658476757/DoDo-Pizza-React/03/03-10_l5ijtc.jpg",
   "image11": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658476757/DoDo-Pizza-React/03/03-11_d94ezp.jpg",
@@ -127,14 +120,11 @@
    329,
    539,
    649
-  ],
-  "category": 1,
-  "rating": 4
+  ]
  },
  {
   "id": 3,
   "realId": 3,
-  "imageUrl": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477055/DoDo-Pizza-React/04/04-10_vdrwvg.jpg",
   "image00": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477055/DoDo-Pizza-React/04/04-00_rfgkib.jpg",
   "image10": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477055/DoDo-Pizza-React/04/04-10_vdrwvg.jpg",
   "image11": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477055/DoDo-Pizza-React/04/04-11_kbf7ak.jpg",
@@ -168,14 +158,11 @@
    299,
    519,
    639
-  ],
-  "category": 2,
-  "rating": 2
+  ]
  },
  {
   "id": 4,
   "realId": 4,
-  "imageUrl": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477175/DoDo-Pizza-React/05/05-10_je4pw2.jpg",
   "image00": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477175/DoDo-Pizza-React/05/05-00_ekiv3d.jpg",
   "image10": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477175/DoDo-Pizza-React/05/05-10_je4pw2.jpg",
   "image11": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477175/DoDo-Pizza-React/05/05-11_tkaiql.jpg",
@@ -217,14 +204,11 @@
    489,
    739,
    889
-  ],
-  "category": 3,
-  "rating": 8
+  ]
  },
  {
   "id": 5,
   "realId": 5,
-  "imageUrl": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477326/DoDo-Pizza-React/06/06-10_uhxfm1.jpg",
   "image00": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477326/DoDo-Pizza-React/06/06-00_h9popu.jpg",
   "image10": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477326/DoDo-Pizza-React/06/06-10_uhxfm1.jpg",
   "image11": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477326/DoDo-Pizza-React/06/06-11_b1uucd.jpg",
@@ -269,14 +253,11 @@
    539,
    839,
    999
-  ],
-  "category": 2,
-  "rating": 2
+  ]
  },
  {
   "id": 6,
   "realId": 6,
-  "imageUrl": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477438/DoDo-Pizza-React/07/07-10_mcoyjv.jpg",
   "image00": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477438/DoDo-Pizza-React/07/07-00_xjjqxm.jpg",
   "image10": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477438/DoDo-Pizza-React/07/07-10_mcoyjv.jpg",
   "image11": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477438/DoDo-Pizza-React/07/07-11_eqpgqk.jpg",
@@ -314,14 +295,11 @@
    299,
    519,
    639
-  ],
-  "category": 1,
-  "rating": 9
+  ]
  },
  {
   "id": 7,
   "realId": 7,
-  "imageUrl": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477554/DoDo-Pizza-React/08/08-10_inagbu.jpg",
   "image00": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477554/DoDo-Pizza-React/08/08-00_hnva2m.jpg",
   "image10": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477554/DoDo-Pizza-React/08/08-10_inagbu.jpg",
   "image11": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477554/DoDo-Pizza-React/08/08-11_lnowmz.jpg",
@@ -360,14 +338,11 @@
    489,
    739,
    889
-  ],
-  "category": 4,
-  "rating": 10
+  ]
  },
  {
   "id": 8,
   "realId": 8,
-  "imageUrl": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477732/DoDo-Pizza-React/09/09-10_wjgfi0.jpg",
   "image00": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477732/DoDo-Pizza-React/09/09-00_onmb8b.jpg",
   "image10": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477732/DoDo-Pizza-React/09/09-10_wjgfi0.jpg",
   "image11": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658477731/DoDo-Pizza-React/09/09-11_gusf8v.jpg",
@@ -406,14 +381,11 @@
    439,
    669,
    829
-  ],
-  "category": 5,
-  "rating": 10
+  ]
  },
  {
   "id": 9,
   "realId": 9,
-  "imageUrl": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658478041/DoDo-Pizza-React/10/10-10_gdwjob.jpg",
   "image00": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658478041/DoDo-Pizza-React/10/10-00_fqxdsd.jpg",
   "image10": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658478041/DoDo-Pizza-React/10/10-10_gdwjob.jpg",
   "image11": "https://res.cloudinary.com/domjlwhjm/image/upload/v1658478041/DoDo-Pizza-React/10/10-11_eevd5t.jpg",
@@ -452,8 +424,6 @@
    439,
    669,
    829
-  ],
-  "category": 5,
-  "rating": 7
+  ]
  }
 ]

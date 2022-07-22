@@ -6,6 +6,9 @@ import PizzaCard from "../PizzaCard/PizzaCard";
 import {useSelector} from "react-redux";
 import Skeleton from '../Skeleton/Skeleton';
 import {setStatus} from "../../redux/Slices/pizzaSlice";
+
+
+
 const PizzaList = () => {
 
     const loadingRef = useRef(false);

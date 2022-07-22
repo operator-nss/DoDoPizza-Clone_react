@@ -4,11 +4,11 @@ import {fetchPizza} from "../asyncActions";
 
 
 export interface Pizza {
-    imageUrl: string,
     image00 : string,
     image11 : string,
     image20 : string,
     image21 : string,
+    image10 : string,
     title: string,
     price: number[],
     realId: number,
