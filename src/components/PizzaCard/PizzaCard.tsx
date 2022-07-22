@@ -39,6 +39,8 @@ const PizzaCard: React.FC<PizzaCardProps> = ({
         if (openPopup && !isMobile) {
             document.body.style.overflow = "hidden";
             document.body.style.paddingRight = '17px';
+        } else if (openPopup && isMobile) {
+            document.body.style.overflow = "hidden";
         } else {
             setTimeout(() => {
                 document.body.style.overflow = '';
@@ -46,6 +48,7 @@ const PizzaCard: React.FC<PizzaCardProps> = ({
             }, 300)
         }
     }, [openPopup])
+
 
     // При нажатии на пиццу открываем попап с пиццей
     const openPizzaPopup = () => {

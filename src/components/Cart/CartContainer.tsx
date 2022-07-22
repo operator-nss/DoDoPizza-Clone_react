@@ -37,9 +37,11 @@ const CartContainer: React.FC = () => {
     //Убирание дерганья при открытии корзины
     useEffect(() => {
         if (cartOpened && !isMobile) {
-            document.body.style.overflow = "hidden";
             document.body.style.paddingRight = '17px';
-        } else {
+            document.body.style.overflow = "hidden";
+        } else if (cartOpened && isMobile) {
+            document.body.style.overflow = "hidden";
+        }  else {
             setTimeout(() => {
                 document.body.style.overflow = '';
                 document.body.style.paddingRight = '';
