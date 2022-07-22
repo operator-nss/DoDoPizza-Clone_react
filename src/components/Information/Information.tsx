@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import './information.scss'
 import information01 from '../../assets/img/information/01.jpg'
 import information02 from '../../assets/img/information/02.jpg'
@@ -13,7 +13,7 @@ import information10 from '../../assets/img/information/10.jpg'
 import clsx from "clsx";
 
 
-const Information = () => {
+const Information = memo(() => {
     const [activeInfo, setActiveInfo] = useState(false);
 
     // При нажатии на стрелку сдвигается компонент
@@ -126,6 +126,6 @@ const Information = () => {
         </div>
     )
         ;
-};
+});
 
 export default Information;

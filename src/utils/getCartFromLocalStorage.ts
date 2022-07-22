@@ -11,7 +11,6 @@ export const getCartFromLocalStorage = () => {
     let arrAdded: any[] = [];
     let arrSouceAdded: any[] = [];
     let addToOrderItems: { title: any; }[] = [];
-    // let newOrderItems: { selected: boolean; id: number; realId: number; title: string; price: string; params: string; image: string; count: number; }[] = [];
 
     let addSouceArr = [];
 

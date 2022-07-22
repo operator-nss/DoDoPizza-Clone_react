@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {memo, useCallback, useEffect, useMemo, useState} from 'react';
 import './pizzapopup.scss'
 import closeButton from '../../assets/img/close.svg'
 import circleMed from '../../assets/img/circlemed.svg'
@@ -28,6 +28,8 @@ import {useSelector} from "react-redux";
 import {RootState, useAppDispatch} from "../../redux/store";
 import {PizzaCart, setCartItems} from "../../redux/Slices/cartSlice";
 import {useDebouncedCallback} from "use-debounce";
+import PizzaPopupSendInfo from "./PizzaPopupSendInfo";
+import Additivies from "./Additivies";
 
 type PizzaPopupProps = {
     openPopup: boolean,
@@ -46,7 +48,7 @@ type PizzaPopupProps = {
     realId: number,
 }
 
-const PizzaPopup: React.FC<PizzaPopupProps> = ({
+const PizzaPopup: React.FC<PizzaPopupProps> = memo(({
                                                    openPopup,
                                                    title,
                                                    price,
@@ -87,11 +89,12 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
             {selected: false, id: 16, title: 'Пикантная пепперони', price: '59', image: add17},
         ]);
         const {cartOpened, cartItems} = useSelector((state: RootState) => state.cart);
+
         const [addedAdditivities, setAddedAdditivities] = useState<string[]>([]);
         const [activeImage, setActiveImage] = useState('');
 
-        const sizes = ['Маленькая', 'Средняя', 'Большая'];
-        const types = ['Традиционное', 'Тонкое'];
+        const sizes = useMemo(() => ['Маленькая', 'Средняя', 'Большая'], []);
+        const types =useMemo(() =>  ['Традиционное', 'Тонкое'], []);
         const radius = [25, 30, 35];
 
         const dispatch = useAppDispatch();
@@ -102,28 +105,28 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
         }, 4000);
 
         // закрыть попап
-        const onClickClosePopup = () => {
+        const onClickClosePopup = useCallback(() => {
             setOpenPopup(false);
             setOpenPopupInfo(false)
-        }
+        },[setOpenPopup])
 
         // Установка кнопки размера пиццы исходя из state
-        const setActiveSizeButton = (i: number) => {
+        const setActiveSizeButton = useCallback((i: number) => {
             setActiveSize(i);
             if (i === 0) {
                 setActiveType(0)
             }
-        }
+        },[])
 
         // Установка кнопки типа пиццы исходя из state
-        const setActiveTypeButton = (i: number) => {
+        const setActiveTypeButton = useCallback((i: number) => {
             setActiveType(i)
-        }
+        },[])
 
         // Открытие Инфо-папапа
-        const openInfoPopup = () => {
+        const openInfoPopup = useCallback(() => {
             setOpenPopupInfo(!openPopupInfo)
-        }
+        },[openPopupInfo])
 
         // рендер картинки при выборе заного размера и типа пиццы
         const renderPizza = useCallback(() => {
@@ -153,13 +156,13 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
         }, [cartOpened, setOpenPopup])
 
         // Рассчет суммы за пиццу исходя из ее типа
-        const reducePrice = () => {
+        const reducePrice = useCallback(() => {
             if (activeType === 0) {
                 return price[activeSize] + addableItems.filter(item => item.selected)?.reduce((num, item) => num + +item.price, 0);
             } else {
                 return price[activeSize] - 100 + addableItems.filter(item => item.selected)?.reduce((num, item) => num + +item.price, 0)
             }
-        }
+        }, [activeSize, activeType, addableItems, price])
 
         // Добавление пиццы в корзину и после добавления закрытие всех открытыхх попапов
         const addPizzaToCart = async () => {
@@ -189,13 +192,13 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
         }
 
         // Ингридиенты которые еще не добавлены
-        const addAdditivities = (title: string) => {
+        const addAdditivities = useCallback((title: string) => {
             if (addedAdditivities.some(item => item === title)) {
                 setAddedAdditivities(addedAdditivities.filter(item => item !== title))
             } else {
                 setAddedAdditivities([...addedAdditivities, title])
             }
-        }
+        },[addedAdditivities])
 
 
         return (
@@ -204,11 +207,7 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
                      style={openPopup ? {'visibility': 'visible'} : {'visibility': 'hidden'}}
                      className={clsx({open: openPopup}, "pizza__overlay")}/>
 
-
-                <div className={clsx('popup-pizza__send', {active: openPopupSend})}>
-                    <div>Добавлено:</div>
-                    <div>{title}, {radius[activeSize]}см</div>
-                </div>
+                <PizzaPopupSendInfo openPopupSend={openPopupSend} title={title} radius={radius} activeSize={activeSize}/>
 
                 <div className={clsx({open: openPopup}, "pizza__popup popup-pizza")}>
                     <button onClick={onClickClosePopup} className="popup-pizza__close">
@@ -284,7 +283,7 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
                             <div className="description-popup__ingridients">
                                 {additives?.length > 0 ? (
                                         additives.map(item => {
-                                            return <span key={item}>{item}</span>
+                                            return <Additivies key={item} item={item}/>
                                         }))
                                     : null
                                 }
@@ -334,7 +333,7 @@ const PizzaPopup: React.FC<PizzaPopupProps> = ({
 
         )
             ;
-    }
+    })
 ;
 
 export default PizzaPopup;

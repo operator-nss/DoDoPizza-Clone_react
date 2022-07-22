@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {memo, useCallback, useEffect, useState} from 'react';
 import star from '../../assets/img/star.svg'
 import logo from '../../assets/img/bird.png'
 import {RootState, useAppDispatch} from "../../redux/store";
@@ -9,12 +9,13 @@ import arrowCart from '../../assets/img/arrow.svg'
 import {useSelector} from "react-redux";
 import {CalcTotalItems} from "../../utils/calcTotalPrice";
 import {Link} from "react-router-dom";
+import {isMobile} from "react-device-detect";
 
 
-const Header: React.FC = () => {
+const Header: React.FC = memo(() => {
     const dispatch = useAppDispatch();
     const [hoverCart, setHoverCart] = useState(false);
-    const {cartItems} = useSelector((state: RootState) => state.cart);
+    const {cartItems, cartOpened} = useSelector((state: RootState) => state.cart);
     const [openBurger, setOpenBurger] = useState(false);
 
     //Аналог Intersection Observer
@@ -23,14 +24,14 @@ const Header: React.FC = () => {
     });
 
     //Открыть корзину
-    const openCart = () => {
+    const openCart = useCallback(() => {
         dispatch(setCartOpened(true));
-    }
+    },[dispatch])
 
     //Открыть/закрыть бургер меню
-    const toggleBurger = () => {
+    const toggleBurger = useCallback(() => {
         setOpenBurger(!openBurger)
-    }
+    },[openBurger])
 
     //При открытии бургера нельзя скроллить сайт
     useEffect(() => {
@@ -39,7 +40,16 @@ const Header: React.FC = () => {
         } else {
             document.body.style.overflow = '';
         }
-    }, [openBurger])
+        if(cartOpened && !isMobile) {
+            document.body.style.overflow = "hidden";
+            document.body.style.paddingRight = '17px';
+        }else if (cartOpened && isMobile){
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '0';
+        }
+    }, [cartOpened, openBurger])
 
 
 
@@ -146,6 +156,6 @@ const Header: React.FC = () => {
         </header>
     )
         ;
-};
+});
 
 export default Header;

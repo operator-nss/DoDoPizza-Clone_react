@@ -41,7 +41,7 @@ const PizzaList = () => {
 
     // Рендерим пиццы
     const pizzass = pizzas.map((item) => {
-        return <PizzaCard key={item.id} {...item} />
+        return  <PizzaCard key={item.id} {...item} />
     })
 
     return (
@@ -49,7 +49,8 @@ const PizzaList = () => {
             <div className="pizza__container">
                 <h2 className="pizza__title">Пицца</h2>
                 <div className="pizza__items">
-                    {(status === 'pizza loading') ? [...new Array(8)].map((_, index) => <Skeleton
+                    {status === 'error' ? <h2 className="error">Ошибка при получении пицц</h2> :
+                    (status === 'pizza loading') ? [...new Array(8)].map((_, index) => <Skeleton
                         key={index}/>) : pizzass}
                 </div>
             </div>

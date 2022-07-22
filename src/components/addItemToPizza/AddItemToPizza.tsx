@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import clsx from "clsx";
 import select from '../../assets/img/add/select.svg'
 
@@ -6,7 +6,7 @@ type AddItemToPizzaProps = {
     image: string, title: string, price: string, selected: boolean, addableItems: any[], id: number, setAddableItems: any
 }
 
-const AddItemToPizza: React.FC<AddItemToPizzaProps> = ({
+const AddItemToPizza: React.FC<AddItemToPizzaProps> = memo(({
                                                            image,
                                                            id,
                                                            setAddableItems,
@@ -34,7 +34,7 @@ const AddItemToPizza: React.FC<AddItemToPizzaProps> = ({
             <div className="add-description-popup__price">{price}₽</div>
         </button>
     );
-};
+});
 
 export default AddItemToPizza;
 

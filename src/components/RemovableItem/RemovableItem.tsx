@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import clsx from "clsx";
 
 type RemovableItemProps = {
@@ -6,7 +6,7 @@ type RemovableItemProps = {
     addAdditivities: (title: string) => void
 }
 
-const RemovableItem: React.FC<RemovableItemProps> = ({title, addAdditivities}) => {
+const RemovableItem: React.FC<RemovableItemProps> = memo(({title, addAdditivities}) => {
 
     const [deleteItem, setDeleteItem] = useState(false);
 
@@ -28,6 +28,6 @@ const RemovableItem: React.FC<RemovableItemProps> = ({title, addAdditivities}) =
             </svg>
         </button>
     );
-};
+});
 
 export default RemovableItem;

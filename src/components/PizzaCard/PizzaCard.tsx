@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {memo, useCallback, useEffect, useState} from 'react';
 import PizzaPopup from "../PizzaPopup/PizzaPopup";
 import {isMobile} from 'react-device-detect';
 
@@ -17,7 +17,7 @@ type PizzaCardProps = {
     compound: number[],
 }
 
-const PizzaCard: React.FC<PizzaCardProps> = ({
+const PizzaCard: React.FC<PizzaCardProps> = memo(({
                                                  compound,
                                                  image00,
                                                  image11,
@@ -51,9 +51,9 @@ const PizzaCard: React.FC<PizzaCardProps> = ({
 
 
     // При нажатии на пиццу открываем попап с пиццей
-    const openPizzaPopup = () => {
+    const openPizzaPopup = useCallback(() => {
         setOpenPopup(true);
-    }
+    },[])
 
     return (
         <div className="pizza__item item-pizza">
@@ -86,6 +86,6 @@ const PizzaCard: React.FC<PizzaCardProps> = ({
             </div>
         </div>
     );
-};
+});
 
 export default PizzaCard;

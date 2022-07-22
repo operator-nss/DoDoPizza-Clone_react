@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {memo, useCallback, useState} from 'react';
 import clsx from "clsx";
 import {RootState, useAppDispatch} from "../../redux/store";
 import {AddableToCart, setAddToOrder,} from "../../redux/Slices/cartSlice";
@@ -15,7 +15,7 @@ type AddOrderItemProps = {
     setOpenPopupSouces: any
 }
 
-const AddOrderItem: React.FC<AddOrderItemProps> = ({
+const AddOrderItem: React.FC<AddOrderItemProps> = memo(({
                                                        selected,
                                                        id,
                                                        title,
@@ -32,7 +32,7 @@ const AddOrderItem: React.FC<AddOrderItemProps> = ({
 
 
     //Добавление товара в корзину
-    const selectItemToOrder = () => {
+    const selectItemToOrder = useCallback(() => {
         if (id === 0) {
             setOpenPopupSouces(true)
         } else {
@@ -50,7 +50,7 @@ const AddOrderItem: React.FC<AddOrderItemProps> = ({
             }
             dispatch(setAddToOrder(item));
         }
-    }
+    },[cartItems.length, dispatch, id, image, params, price, realId, selectedClass, setOpenPopupSouces, title])
 
     return (
         <div onClick={selectItemToOrder} className={clsx("add-order__item", {select: selectedClass})}>
@@ -64,7 +64,7 @@ const AddOrderItem: React.FC<AddOrderItemProps> = ({
         </div>
     )
         ;
-};
+});
 
 export default AddOrderItem;
 

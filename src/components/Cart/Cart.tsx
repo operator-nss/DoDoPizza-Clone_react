@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {memo, useCallback, useEffect} from 'react';
 import closeButtonB from "../../assets/img/close-b.svg";
 import info from "../../assets/img/info.svg";
 import dotcoins from "../../assets/img/dotcoins.svg";
@@ -11,6 +11,7 @@ import AddOrderItem from "../AddOrderItem/AddOrderItem";
 import AddSouce from "../AddSouce/AddSouce";
 import axios from "axios";
 import {setOrderId} from "../../redux/Slices/orderSlice";
+import ItemOrder from "./ItemOrder";
 
 
 type CartProps = {
@@ -23,7 +24,7 @@ type CartProps = {
 }
 
 
-const Cart: React.FC<CartProps> = ({
+const Cart: React.FC<CartProps> = memo(({
                                        setOpenPopupInfo,
                                        openPopupInfo,
                                        openPopupSouces,
@@ -34,13 +35,13 @@ const Cart: React.FC<CartProps> = ({
     const dispatch = useAppDispatch();
 
 //Правило орфографии для разного количества товара
-    const writeItem = () => {
+    const writeItem = useCallback(() => {
         if (cartItems.length === 1) {
             return 'товар'
         } else if ((cartItems.length >= 2) && (cartItems.length <= 4)) {
             return 'товара'
         } else return 'товаров'
-    }
+    },[cartItems.length])
 
 
 
@@ -58,20 +59,7 @@ const Cart: React.FC<CartProps> = ({
         renderAddableItems()
     }, [addSouce, cartItems, renderAddableItems])
 
-    //Добавление пиццы по кнопке +
-    const pizzaCountPlus = (id: number | string) => {
-        dispatch(addPizza(id))
-    }
 
-    //Добавление пиццы по кнопке -
-    const pizzaCountMinus = (id: number) => {
-        dispatch(minusPizza(id))
-    }
-
-    //Удаление товара из корзины
-    const deleteItem = (id: number) => {
-        dispatch(deletePizza(id))
-    }
 
     //Закрытие попапа соусов
     const closePopupSouce = () => {
@@ -107,47 +95,7 @@ const Cart: React.FC<CartProps> = ({
 
                 <>
                     {cartItems.map(item => {
-                        const {
-                            title,
-                            price,
-                            image,
-                            removeFromPizza,
-                            size,
-                            radius,
-                            type,
-                            addableItems,
-                            count,
-                            realId,
-                            id
-                        } = item;
-                        return <div key={id} className="order__item item-order">
-                            <div className="item-order__top">
-                                <button onClick={() => deleteItem(id)} className="item-order__close">
-                                    <img src={closeButtonB} alt="картинка"/>
-                                </button>
-                                <div className="item-order__image-ibg">
-                                    <img src={image} alt="картинка"/>
-                                </div>
-                                <div className="item-order__description">
-                                    <div className="item-order__title">{title}</div>
-                                    <div className="item-order__options">{size} {radius} см, {type} тесто</div>
-                                    <div className="item-order__options">{addableItems?.length > 0 ?
-                                        (<b>Добавить: {addableItems.join(', ')}</b>) : ''}</div>
-                                    <div className="item-order__options">{removeFromPizza?.length > 0 ?
-                                        (`Убрать: ${removeFromPizza.join(', ')}`) : ''}</div>
-                                </div>
-                            </div>
-
-                            <div className="item-order__bottom">
-                                <div className="item-order__price">{price * count} ₽</div>
-                                <div className="item-order__quantity">
-                                    <button onClick={() => pizzaCountMinus(id)}
-                                            className="quantity__button">&mdash;</button>
-                                    <div className="quantity__center">{count}</div>
-                                    <button onClick={() => pizzaCountPlus(id)} className="quantity__button">+</button>
-                                </div>
-                            </div>
-                        </div>
+                        return <ItemOrder key={item.id} {...item} />
                     })}
 
                 </>
@@ -241,6 +189,6 @@ const Cart: React.FC<CartProps> = ({
 
         </>
     );
-};
+});
 
 export default Cart;

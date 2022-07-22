@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import {useAppDispatch} from "../../redux/store";
 import {AddableToCart, deleteSouce, minusSouce, setSouceItems} from "../../redux/Slices/cartSlice";
 
@@ -6,7 +6,7 @@ type AddSouceProps = {
     selected: boolean, id: number,realId:number, title: string, price: string, image: string, count:number
 }
 
-const AddSouce: React.FC<AddSouceProps> = ({selected,realId, id, count, title, price, image}) => {
+const AddSouce: React.FC<AddSouceProps> = memo(({selected,realId, id, count, title, price, image}) => {
 
     let [souceCount, setSouceCount] = useState(0);
     const dispatch = useAppDispatch();
@@ -63,6 +63,6 @@ const AddSouce: React.FC<AddSouceProps> = ({selected,realId, id, count, title, p
             }
         </div>
     );
-};
+});
 
 export default AddSouce;
